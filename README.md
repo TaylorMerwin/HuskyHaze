@@ -3,7 +3,7 @@
 # Members:
 
 - Taylor Merwin
-- Keegan Sanders
+- Keegan Sanders again
 - Minh Vu
 - William Hay
 
