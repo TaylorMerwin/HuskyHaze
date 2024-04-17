@@ -4,3 +4,5 @@
 
 - Taylor Merwin
 - Keegan Sanders
+- William Hay
+- 
