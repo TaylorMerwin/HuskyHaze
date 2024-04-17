@@ -4,3 +4,4 @@
 
 - Taylor Merwin
 - Keegan Sanders
+- Minh Vu
