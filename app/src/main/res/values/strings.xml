@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">HuskyHaze</string>
+    <string name="weather">Weather</string>
+    <string name="news">News</string>
+    <string name="open_weather_api_key">6483990cc372b51dd6b1d7143741a1ee</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->
