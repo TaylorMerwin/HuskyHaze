@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">HuskyHaze</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="settings_header">Settings</string>
+
+    <!-- Sync Preferences -->
+    <string name="theme_title">Dark Mode</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>
