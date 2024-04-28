@@ -5,7 +5,6 @@
         <item name="colorPrimaryVariant">@color/purple</item>
         <item name="colorOnPrimary">@color/white</item>
 
-
     </style>
 
     <style name="AppTheme.Dark" parent="Theme.AppCompat">

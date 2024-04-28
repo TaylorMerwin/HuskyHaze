@@ -11,4 +11,10 @@
     <!-- Sync Preferences -->
     <string name="theme_title">Dark Mode</string>
     <string name="mode_title">Minimal Mode</string>
+    <string name="dark_light_mode">Dark/Light Mode</string>
+    <string name="switcher_1">Switch 1</string>
+    <string name="switcher_2">Switch 2</string>
+    <string name="button_1">Button 1</string>
+    <string name="settings">Settings</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
