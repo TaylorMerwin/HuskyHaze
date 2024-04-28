@@ -4,7 +4,7 @@
     <string name="news">News</string>
     <string name="open_weather_api_key">6483990cc372b51dd6b1d7143741a1ee</string>
     <string name="title_activity_settings">SettingsActivity</string>
-
+    <string name="test"> TESTING LIGHT DARK MODE lorem lorem somasaas</string>
     <!-- Preference Titles -->
     <string name="settings_header">Settings</string>
 
