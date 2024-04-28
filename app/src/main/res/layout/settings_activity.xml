@@ -17,10 +17,9 @@
             android:id="@+id/backButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="#00FFFFFF"
             android:padding="14dp"
-            android:src="@drawable/baseline_arrow_back_24"
-            app:tint="@drawable/touch_selector" />
+            android:src="@drawable/back_button_light"
+             />
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,7 +45,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/baseline_android_24" />
+                android:src="@drawable/android_avatar" />
 
             <TextView
                 android:layout_width="wrap_content"
