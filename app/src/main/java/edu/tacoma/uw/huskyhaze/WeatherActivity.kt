@@ -17,9 +17,7 @@ class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
-
         temperatureTextView = findViewById(R.id.temperatureTextView)
-
         fetchCurrentWeather()
     }
 
@@ -27,6 +25,7 @@ class WeatherActivity : AppCompatActivity() {
     private fun fetchCurrentWeather() {
         val weatherService = WeatherService.create()
         val apiKey = getString(R.string.open_weather_api_key)
+        // UWT coordinates
         val latitude = 47.24
         val longitude = -122.43
 
@@ -37,7 +36,11 @@ class WeatherActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     val weatherData = response.body()
-                    temperatureTextView.text = "Temperature: $weatherData"
+                    var currentTemp = 0.0
+                    if (weatherData != null) {
+                        currentTemp = weatherData.main.temp;
+                    }
+                    temperatureTextView.text = "Temperature: $currentTemp"
                     Log.d("WeatherResponse", weatherData.toString())
                 } else {
                     Log.e("WeatherResponse", response.errorBody().toString())
