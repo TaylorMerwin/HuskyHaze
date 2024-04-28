@@ -3,4 +3,5 @@
     <string name="weather">Weather</string>
     <string name="news">News</string>
     <string name="open_weather_api_key">6483990cc372b51dd6b1d7143741a1ee</string>
+    <string name="news_api_key">4fb618dafb754d8183e4154fbdbb4930</string>
 </resources>
