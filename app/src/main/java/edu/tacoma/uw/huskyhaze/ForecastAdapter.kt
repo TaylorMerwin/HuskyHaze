@@ -1,5 +1,6 @@
 package edu.tacoma.uw.huskyhaze
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,13 +25,14 @@ class ForecastAdapter(private val forecastList: List<WeatherData.DailyData>) :
         return ForecastViewHolder(itemView)
     }
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
             val currentForecast = forecastList[position]
 
             holder.dateTextView.text = currentForecast.dt.toDate().formatToDayMonth()
-            holder.minTempTextView.text = currentForecast.temp.min.toString()
-            holder.maxTempTextView.text = currentForecast.temp.max.toString()
-            holder.weatherTypeTextView.text = currentForecast.weather.main
+            holder.minTempTextView.text = "Min: " + currentForecast.temp.min.toString() + "°F"
+            holder.maxTempTextView.text = "Max: " + currentForecast.temp.max.toString() + "°F"
+            holder.weatherTypeTextView.text = currentForecast.weather[0].main
         }
 
     override fun getItemCount(): Int {
