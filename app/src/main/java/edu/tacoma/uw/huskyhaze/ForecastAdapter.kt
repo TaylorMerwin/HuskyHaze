@@ -24,9 +24,6 @@ class ForecastAdapter(private val forecastList: List<WeatherData.DailyData>) :
         return ForecastViewHolder(itemView)
     }
 
-
-
-
         override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
             val currentForecast = forecastList[position]
 
