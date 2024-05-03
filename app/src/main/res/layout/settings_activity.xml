@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Username"
+                android:text="@string/username"
                 style="@style/TEXT"
                 android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="+123123123"
+                android:text="@string/_phoneNumber"
                 style="@style/TEXT"
                 android:textSize="12sp" />
 
@@ -89,7 +89,7 @@
                 <Switch
                     android:id="@+id/dark_light_switch"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="@integer/material_motion_duration_long_1"
                     android:text="@string/dark_light_mode"
                     android:textColor="@color/white"
@@ -111,7 +111,7 @@
                 <Switch
                     android:id="@+id/switch1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="@integer/material_motion_duration_long_1"
                     android:text="@string/switcher_1"
                     android:textColor="@color/white"
@@ -132,7 +132,7 @@
                 <Switch
                     android:id="@+id/switch2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="@integer/material_motion_duration_long_1"
                     android:text="@string/switcher_2"
                     android:textColor="@color/white"

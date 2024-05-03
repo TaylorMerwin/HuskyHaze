@@ -3,6 +3,8 @@ package edu.tacoma.uw.huskyhaze
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import edu.tacoma.uw.huskyhaze.network.NewsService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,11 +29,16 @@ class NewsActivity : AppCompatActivity() {
             if (response.isSuccessful) {
                 val newsData = response.body()
                 if (newsData != null) {
-                    // Do something with the news data
+                    val newsAdapter = NewsAdapter(newsData.articles)
+                    runOnUiThread {
+                        val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
+                        recyclerView.adapter = newsAdapter
+                        recyclerView.layoutManager = LinearLayoutManager(this@NewsActivity)
+                    }
+
                     Log.d("NewsResponse", newsData.toString())
                 }
             } else {
-                // Handle the error
                 Log.e("NewsResponse", response.errorBody().toString())
             }
         }

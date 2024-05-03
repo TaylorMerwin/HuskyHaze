@@ -23,4 +23,6 @@
     <string name="greeting">Good [morning], [User]. \nIt is currently [55]&#xB0; and [sunny] in [Tacoma].</string>
     <string name="show_me">Show me…</string>
     <string name="home_background_image">Home Background Image</string>
+    <string name="username">Username</string>
+    <string name="_phoneNumber">+123123123</string>
 </resources>
