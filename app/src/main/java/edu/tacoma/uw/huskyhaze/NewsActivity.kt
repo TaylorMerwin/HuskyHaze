@@ -1,5 +1,7 @@
 package edu.tacoma.uw.huskyhaze
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +31,13 @@ class NewsActivity : AppCompatActivity() {
             if (response.isSuccessful) {
                 val newsData = response.body()
                 if (newsData != null) {
-                    val newsAdapter = NewsAdapter(newsData.articles)
+                    val newsAdapter = NewsAdapter(newsData.articles, object : NewsAdapter.OnItemClickListener {
+                        override fun onItemClick(url: String) {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            startActivity(intent)
+                        }
+                    })
+
                     runOnUiThread {
                         val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
                         recyclerView.adapter = newsAdapter
