@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         val weatherButton = findViewById<Button>(R.id.weatherButton)
         val newsButton = findViewById<Button>(R.id.newsButton)
         val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
+        val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
 
         weatherButton.setOnClickListener {
             val intent = Intent(this, WeatherActivity::class.java)
@@ -60,6 +61,10 @@ class MainActivity : AppCompatActivity() {
                     TODO("Not yet implemented")
                 }
             })
+        }
+        aboutUsButton.setOnClickListener {
+            val intent = Intent(this, AboutUsActivity::class.java)
+            startActivity(intent)
         }
     }
     private fun getScreenWidth(): Int {
