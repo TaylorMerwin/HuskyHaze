@@ -1,5 +1,8 @@
 package edu.tacoma.uw.huskyhaze
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -24,8 +27,34 @@ class SettingsActivity : AppCompatActivity() {
         val backButton = findViewById<ImageButton>(R.id.backButton)
 
         backButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            val translateAnimator = ObjectAnimator.ofFloat(
+                backButton,
+                "translationX",
+                0f, (getScreenWidth().toFloat()-backButton.width.toFloat()-25)
+            )
+            translateAnimator.duration = 1000
+            val rotateAnimator = ObjectAnimator.ofFloat(backButton, "rotation", 0f, 540f)
+            rotateAnimator.duration = 1000
+            val animatorSet = AnimatorSet()
+            animatorSet.playTogether(translateAnimator, rotateAnimator)
+            animatorSet.start()
+            animatorSet.addListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator) {
+                    TODO("Not yet implemented")
+                }
+                override fun onAnimationEnd(animation: Animator) {
+                    val intent = Intent(this@SettingsActivity, MainActivity::class.java)
+                    startActivity(intent)
+                }
+                override fun onAnimationCancel(animation: Animator) {
+                    TODO("Not yet implemented")
+                }
+                override fun onAnimationRepeat(animation: Animator) {
+                    TODO("Not yet implemented")
+                }
+            })
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
 
         supportActionBar?.hide()
@@ -51,5 +80,9 @@ class SettingsActivity : AppCompatActivity() {
             }
             editor.apply()
         }
+    }
+
+    private fun getScreenWidth(): Int {
+        return resources.displayMetrics.widthPixels
     }
 }

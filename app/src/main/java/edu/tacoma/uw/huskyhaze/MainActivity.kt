@@ -1,7 +1,11 @@
 package edu.tacoma.uw.huskyhaze
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
@@ -30,8 +34,35 @@ class MainActivity : AppCompatActivity() {
         }
 
         settingsButton.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
+            val translateAnimator = ObjectAnimator.ofFloat(
+                settingsButton,
+                "translationX",
+                0f, -(getScreenWidth().toFloat()-settingsButton.width.toFloat()-50)
+            )
+            translateAnimator.duration = 1000
+            val rotateAnimator = ObjectAnimator.ofFloat(settingsButton, "rotation", 0f, -540f)
+            rotateAnimator.duration = 1000
+            val animatorSet = AnimatorSet()
+            animatorSet.playTogether(translateAnimator, rotateAnimator)
+            animatorSet.start()
+            animatorSet.addListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator) {
+                    TODO("Not yet implemented")
+                }
+                override fun onAnimationEnd(animation: Animator) {
+                    val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+                    startActivity(intent)
+                }
+                override fun onAnimationCancel(animation: Animator) {
+                    TODO("Not yet implemented")
+                }
+                override fun onAnimationRepeat(animation: Animator) {
+                    TODO("Not yet implemented")
+                }
+            })
         }
+    }
+    private fun getScreenWidth(): Int {
+        return resources.displayMetrics.widthPixels
     }
 }

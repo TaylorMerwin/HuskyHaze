@@ -21,5 +21,6 @@
     <string name="todo">TODO</string>
     <string name="settings_button">Settings button</string>
     <string name="greeting">Good [morning], [User]. \nIt is currently [55]&#xB0; and [sunny] in [Tacoma].</string>
-    <string name="show_me">Show me...</string>
+    <string name="show_me">Show me…</string>
+    <string name="home_background_image">Home Background Image</string>
 </resources>
