@@ -25,13 +25,14 @@
     <string name="team_members_content_Will">William Hay Email: whay@uw.edu</string>
     <string name="team_members_content_Minh">Minh Vu Email: minhv2@uw.edu</string>
     <string name="team_members_content_Taylor">Taylor Merwin Email: tmerwin@uw.edu</string>
-    <string name="team_members_content_Keegan">Keegan Sanders Email: aaa@uw.edu</string>
+    <string name="team_members_content_Keegan">Keegan Sanders Email: Ksanders@uw.edu</string>
     <string name="github_link">GitHub Repository</string>
-    <string name="github_link_content">Explore our codebase and contribute to the development of Husky Haze on GitHub: HuskyHaze Repository</string>
+    <string name="github_link_content">Explore our codebase and contribute to the development of Husky Haze on GitHub: <a href="https://github.com/TaylorMerwin/HuskyHaze">https://github.com/TaylorMerwin/HuskyHaze</a></string>
     <string name="app_purpose">Purpose of the App</string>
     <string name="app_purpose_content_1">Husky Haze is more than just a weather app; it is a comprehensive tool designed to empower UW students with timely information.
         Our mission is to provide students with easy access to both weather forecasts and relevant news updates, all within one convenient platform.</string>
     <string name="app_purpose_content_2">Whether you are planning your day on campus or preparing for a weekend getaway, Husky Haze ensures you\'re always informed and ready for whatever lies ahead.</string>
     <string name="app_purpose_content_3">Stay tuned for updates and new features as we continue to enhance the Husky Haze experience for our fellow UW Huskies!</string>
+    <string name="about_us">About Us</string>
 
 </resources>
