@@ -9,11 +9,13 @@ import android.util.Log
 import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.squareup.picasso.Picasso
 import edu.tacoma.uw.huskyhaze.network.WeatherService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -99,8 +101,9 @@ class MainActivity : AppCompatActivity() {
                         if (weatherData != null) {
                             currentTemp = weatherData.current.temp;
                             currentWeather = weatherData.current.weather[0].main
-
-                            displayWeather(currentTemp, currentWeather)
+                            val iconCode = weatherData.current.weather[0].icon
+                            val iconUrl = "https://openweathermap.org/img/wn/${iconCode}@2x.png"
+                            displayWeather(currentTemp, currentWeather, iconUrl)
                         } else {
                             Log.e("WeatherFetchError", response.errorBody().toString())
                         }
@@ -119,11 +122,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun displayWeather(temperature: Double?, weatherType: String?) {
+    private fun displayWeather(temperature: Double?, weatherType: String?, iconUrl: String?) {
         val greeting = createWelcomeGreeting(temperature, weatherType)
         val greetingTextView = findViewById<TextView>(R.id.GreetingTextView)
+        val weatherIconImageView = findViewById<ImageView>(R.id.weatherIconImageView)
         greetingTextView.text = greeting
         Log.d("WeatherGreeting", greeting)
+        Log.d("WeatherIcon", iconUrl.toString())
+
+        Picasso.get()
+            .load(iconUrl)
+            .into(weatherIconImageView)
     }
 
     private fun getTimeOfDayGreeting(): String {
@@ -140,7 +149,7 @@ class MainActivity : AppCompatActivity() {
     private fun createWelcomeGreeting(temperature: Double? = null, weatherType: String? = null): String {
         val timeGreeting = getTimeOfDayGreeting()
         return if (temperature!= null && weatherType != null) {
-            "Good $timeGreeting! It's $temperature°F and $weatherType in Tacoma."
+            "Good $timeGreeting! It's $temperature°F with $weatherType in Tacoma."
         } else {
             "Good $timeGreeting! Welcome to HuskyHaze."
         }
