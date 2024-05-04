@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         val weatherButton = findViewById<Button>(R.id.weatherButton)
         val newsButton = findViewById<Button>(R.id.newsButton)
         val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
+        val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
 
 
         weatherButton.setOnClickListener {
@@ -75,8 +76,11 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+        aboutUsButton.setOnClickListener {
+            val intent = Intent(this, AboutUsActivity::class.java)
+            startActivity(intent)
+        }
         fetchCurrentWeather()
-
     }
     private fun getScreenWidth(): Int {
         return resources.displayMetrics.widthPixels

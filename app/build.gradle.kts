@@ -7,6 +7,7 @@ android {
     namespace = "edu.tacoma.uw.huskyhaze"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "edu.tacoma.uw.huskyhaze"
         minSdk = 24
@@ -51,6 +52,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.preference)
     implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

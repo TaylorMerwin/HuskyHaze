@@ -8,6 +8,7 @@ class NewsData {
         val title: String,
         val description: String,
         val url: String,
-        val urlToImage: String
+        val urlToImage: String,
+        val author: String
     )
 }

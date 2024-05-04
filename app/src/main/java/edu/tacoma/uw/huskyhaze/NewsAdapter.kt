@@ -9,7 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.tacoma.uw.huskyhaze.models.NewsData
 
-class NewsAdapter(private val newsList: List<NewsData.ArticleData>) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter(
+    private val newsList: List<NewsData.ArticleData>,
+    private val listener: OnItemClickListener
+) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+    interface OnItemClickListener {
+        fun onItemClick(url: String)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.headline_list_items, parent, false)
@@ -25,14 +31,26 @@ class NewsAdapter(private val newsList: List<NewsData.ArticleData>) : RecyclerVi
         return newsList.size
     }
 
-    inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val article = newsList[position]
+                listener.onItemClick(article.url)
+            }
+        }
+
         private val titleTextView: TextView = itemView.findViewById(R.id.text_title)
         private val sourceTextView: TextView = itemView.findViewById(R.id.text_source)
         private val imageView: ImageView = itemView.findViewById(R.id.img_headline)
 
         fun bind(article: NewsData.ArticleData) {
             titleTextView.text = article.title
-            sourceTextView.text = article.description
+            sourceTextView.text = article.author
             Picasso.get().load(article.urlToImage).into(imageView)
 //             Glide.with(itemView.context).load(article.urlToImage).into(imageView)
         }
