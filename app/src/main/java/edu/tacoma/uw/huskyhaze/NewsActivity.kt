@@ -13,6 +13,7 @@ import edu.tacoma.uw.huskyhaze.network.NewsService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class NewsActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -80,9 +81,35 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         val button = v as Button
-        val category = button.getText().toString()
-        // Code below is from a tutorial, will look at this later.
-//        val manager = RequestManager(this)
-//        manager.getNewsHeadlines(listener, category, null)
+        val category = button.text.toString().lowercase(Locale.getDefault())
+        fetchNewsByCategory(category)
     }
+
+    private fun fetchNewsByCategory(category: String) {
+        val newsService = NewsService.create()
+        val apiKey = getString(R.string.news_api_key)
+        val country = "us"
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = newsService.getHeadlinesByCategory(country, category, apiKey)
+            if (response.isSuccessful) {
+                val newsData = response.body()
+                if (newsData != null) {
+                    runOnUiThread {
+                        val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
+                        recyclerView.adapter = NewsAdapter(newsData.articles, object : NewsAdapter.OnItemClickListener {
+                            override fun onItemClick(url: String) {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                startActivity(intent)
+                            }
+                        })
+                    }
+                    Log.d("NewsResponse", newsData.toString())
+                }
+            } else {
+                Log.e("NewsResponse", response.errorBody().toString())
+            }
+        }
+    }
+
 }
