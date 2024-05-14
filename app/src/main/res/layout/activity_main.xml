@@ -130,20 +130,41 @@
             android:id="@+id/aboutUsBtnMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="40dp"
             android:background="@drawable/rounded_rectangle_dark"
             android:backgroundTint="@color/m_primary_container_dark"
             android:fontFamily="@font/roboto"
             android:text="@string/about_us"
             android:textColor="@color/m_on_secondary_dark"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/mapsButton"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/GreetingTextView"
+            app:layout_constraintVertical_bias="0.93" />
+
+        <Button
+            android:id="@+id/mapsButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/rounded_rectangle_dark"
+            android:fontFamily="@font/roboto"
+            android:text="@string/maps"
+            android:textColor="@color/m_on_secondary_dark"
             android:textColorLink="@color/m_on_primary_dark"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/aboutUsBtnMain"
             app:layout_constraintTop_toBottomOf="@+id/GreetingTextView"
-            app:layout_constraintVertical_bias="0.838"
-            tools:ignore="MissingConstraints" />
-      
+            app:layout_constraintVertical_bias="0.924" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
