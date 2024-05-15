@@ -131,7 +131,7 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
         val country = "us"
 
         CoroutineScope(Dispatchers.IO).launch {
-            val response = newsService.searchNews(country, search, apiKey)
+            val response = newsService.searchNews(search, apiKey)
             if (response.isSuccessful) {
                 val newsData = response.body()
                 if (newsData != null) {
