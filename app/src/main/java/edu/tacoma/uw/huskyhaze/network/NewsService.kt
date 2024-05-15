@@ -16,6 +16,13 @@ interface NewsService {
         @Query("apiKey") apiKey: String
     ): Response<NewsData.NewsData>
 
+    @GET("top-headlines")
+    suspend fun searchNews(
+        @Query("country") country: String = "us",
+        @Query("query") query: String,
+        @Query("apiKey") apiKey: String
+    ): Response<NewsData.NewsData>
+
     companion object {
         private const val BASE_URL = "https://newsapi.org/v2/"
 

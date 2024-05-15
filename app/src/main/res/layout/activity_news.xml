@@ -93,6 +93,8 @@
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             app:defaultQueryHint="Search News..."
             app:iconifiedByDefault="false"
             android:layout_width="match_parent"
