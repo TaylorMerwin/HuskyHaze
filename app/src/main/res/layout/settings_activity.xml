@@ -2,12 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/BACKGROUND"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SettingsActivity">
-    <!--    android:background="@color/primary"-->
     <RelativeLayout
         android:id="@+id/settings"
         android:layout_width="match_parent"
@@ -28,7 +26,6 @@
             android:layout_centerInParent="true"
             android:text="@string/settings"
             android:textSize="18sp"
-            style="@style/TEXT"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -54,7 +51,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="@string/username"
-                style="@style/TEXT"
                 android:textStyle="bold" />
 
             <TextView
@@ -62,7 +58,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/_phoneNumber"
-                style="@style/TEXT"
                 android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -72,18 +67,18 @@
                 android:layout_marginTop="20dp"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
-
+                style="@style/ContainedTextSecondary"
                 android:text="@string/edit_profile" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_box"
+                android:layout_marginEnd="30dp"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="15dp"
+                style="@style/ContainedTextPrimary">
 
 
                 <Switch
@@ -92,21 +87,21 @@
                     android:layout_height="0dp"
                     android:layout_weight="@integer/material_motion_duration_long_1"
                     android:text="@string/dark_light_mode"
-                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                    tools:ignore="UseSwitchCompatOrMaterialXml"
+                    style="@style/ContainedTextPrimary" />
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_box"
+                android:layout_marginEnd="30dp"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="15dp"
+                style="@style/ContainedTextPrimary">
 
                 <Switch
                     android:id="@+id/switch1"
@@ -114,48 +109,48 @@
                     android:layout_height="0dp"
                     android:layout_weight="@integer/material_motion_duration_long_1"
                     android:text="@string/switcher_1"
-                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                    tools:ignore="UseSwitchCompatOrMaterialXml"
+                    style="@style/ContainedTextPrimary" />
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_box"
+                android:layout_marginEnd="30dp"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="15dp"
+                style="@style/ContainedTextPrimary" >
                 <Switch
                     android:id="@+id/switch2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="@integer/material_motion_duration_long_1"
                     android:text="@string/switcher_2"
-                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                    tools:ignore="UseSwitchCompatOrMaterialXml"
+                    style="@style/ContainedTextPrimary"  />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_box"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_rectangle"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="15dp"
+                style="@style/ContainedTextPrimary"  >
                 <Button
                     android:id="@+id/aboutUsBtn"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="@integer/material_motion_duration_long_1"
                     android:text="@string/aboutUs"
-                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
