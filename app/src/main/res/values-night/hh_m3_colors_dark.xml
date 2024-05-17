@@ -7,10 +7,10 @@
     <color name="md_theme_onSecondary">#283141</color>
     <color name="md_theme_secondaryContainer">#3E4759</color>
     <color name="md_theme_onSecondaryContainer">#DAE2F9</color>
-    <color name="md_theme_tertiary">#DDC66E</color>
-    <color name="md_theme_onTertiary">#3A3000</color>
-    <color name="md_theme_tertiaryContainer">#544600</color>
-    <color name="md_theme_onTertiaryContainer">#FAE287</color>
+    <color name="md_theme_tertiary">#ECB4EB</color>
+    <color name="md_theme_onTertiary">#49204D</color>
+    <color name="md_theme_tertiaryContainer">#623765</color>
+    <color name="md_theme_onTertiaryContainer">#FFD6FC</color>
     <color name="md_theme_error">#FFB4AB</color>
     <color name="md_theme_onError">#690005</color>
     <color name="md_theme_errorContainer">#93000A</color>

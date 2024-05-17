@@ -20,7 +20,7 @@
 <!--        <item name="colorOnSecondary">@color/black</item>-->
 <!--    </style>-->
     <style name="HuskyHaze" parent="AppTheme">
-        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:background">?attr/colorSurface</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
@@ -53,5 +53,10 @@
     </style>
     <style name="SurfacePrimary" parent="AppTheme">
         <item name="android:background">?attr/colorSurface</item>
+    </style>
+    <style name="ContainerPrimary" parent="AppTheme">
+        <item name="android:background">@drawable/rounded_rectangle_primary</item>
+        <item name="android:backgroundTint">?attr/colorSurfaceContainerHighest</item>
+        <item name="android:padding">10dp</item>
     </style>
 </resources>

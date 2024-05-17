@@ -15,15 +15,18 @@
         android:text="About Us"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:paddingBottom="5dp" />
 
     <!-- Add a button for navigation -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/closeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="35dp"
+        android:layout_margin="5dp"
         android:text="close"
         android:layout_gravity="center"
+        style="@style/ContainedTextTertiary"
         />
 
 </LinearLayout>
