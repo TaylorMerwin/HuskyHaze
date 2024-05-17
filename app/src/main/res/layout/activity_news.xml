@@ -13,79 +13,85 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_1"
                 android:text="Business"
                 android:textSize="12sp"
                 android:padding="6dp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                style="@style/ContainedTextSecondary" >
 
-            </Button>
-            <Button
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_2"
                 android:text="Entertainment"
                 android:textSize="12sp"
                 android:padding="6dp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                style="@style/ContainedTextSecondary" >
 
-            </Button>
-            <Button
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_3"
                 android:text="General"
                 android:textSize="12sp"
                 android:padding="6dp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                style="@style/ContainedTextSecondary" >
 
-            </Button>
-            <Button
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_4"
                 android:text="Health"
                 android:textSize="12sp"
                 android:padding="6dp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                style="@style/ContainedTextSecondary" >
 
-            </Button>
-            <Button
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_5"
                 android:text="Science"
                 android:textSize="12sp"
                 android:padding="6dp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                style="@style/ContainedTextSecondary" >
 
-            </Button>
-            <Button
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_6"
                 android:text="Sports"
                 android:textSize="12sp"
                 android:padding="6dp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                style="@style/ContainedTextSecondary" >
 
-            </Button>
-            <Button
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_7"
                 android:text="Technology"
                 android:textSize="12sp"
                 android:padding="6dp"
                 android:layout_margin="6dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                style="@style/ContainedTextSecondary" >
 
-            </Button>
+            </androidx.appcompat.widget.AppCompatButton>
         </LinearLayout>
     </HorizontalScrollView>
-
     <androidx.cardview.widget.CardView
         android:layout_margin="14dp"
         app:cardElevation="8dp"

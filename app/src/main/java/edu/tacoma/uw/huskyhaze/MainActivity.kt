@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         val weatherButton = findViewById<Button>(R.id.weatherButton)
         val newsButton = findViewById<Button>(R.id.newsButton)
         val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
-        val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
+//        val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
         val mapsButton = findViewById<Button>(R.id.mapsButton)
 
         weatherButton.setOnClickListener {
@@ -83,10 +83,10 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
-        aboutUsButton.setOnClickListener {
-            val intent = Intent(this, AboutUsActivity::class.java)
-            startActivity(intent)
-        }
+//        aboutUsButton.setOnClickListener {
+//            val intent = Intent(this, AboutUsActivity::class.java)
+//            startActivity(intent)
+//        }
         fetchCurrentWeather()
     }
     @Deprecated("Deprecated in Java")
