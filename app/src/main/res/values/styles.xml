@@ -32,12 +32,17 @@
     </style>
     <style name="ContainedTextPrimary" parent="AppTheme">
         <item name="android:textColor">?attr/colorOnPrimary</item>
-        <item name="android:background">@drawable/rounded_rectangle</item>
+        <item name="android:background">@drawable/rounded_rectangle_primary</item>
         <item name="android:backgroundTint">?attr/colorPrimary</item>
     </style>
     <style name="ContainedTextSecondary" parent="AppTheme">
         <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
-        <item name="android:background">@drawable/rounded_rectangle</item>
+        <item name="android:background">@drawable/rounded_rectangle_secondary</item>
         <item name="android:backgroundTint">?attr/colorSecondaryContainer</item>
+    </style>
+    <style name="ContainedTextTertiary" parent="AppTheme">
+        <item name="android:textColor">?attr/colorOnTertiaryContainer</item>
+        <item name="android:background">@drawable/rounded_rectangle_secondary</item>
+        <item name="android:backgroundTint">?attr/colorTertiaryContainer</item>
     </style>
 </resources>
