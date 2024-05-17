@@ -23,8 +23,9 @@
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:background">?attr/colorSurface</item>
     </style>
-    <style name="Homepage" parent="AppTheme">
-
+    <style name="HomepageGreeting" parent="AppTheme">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="Settings" parent="AppTheme">
         <item name="android:textColor">?attr/colorOnPrimary</item>
@@ -44,5 +45,8 @@
         <item name="android:textColor">?attr/colorOnTertiaryContainer</item>
         <item name="android:background">@drawable/rounded_rectangle_secondary</item>
         <item name="android:backgroundTint">?attr/colorTertiaryContainer</item>
+    </style>
+    <style name="SurfacePrimary" parent="AppTheme">
+        <item name="android:background">?attr/colorSurface</item>
     </style>
 </resources>
