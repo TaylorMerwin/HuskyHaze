@@ -17,18 +17,20 @@ class NewsAdapter(
         fun onItemClick(url: String)
     }
 
+    private val filteredNewsList = newsList.filter { it.title != "[Removed]" }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.headline_list_items, parent, false)
         return NewsViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        val article = newsList[position]
+        val article = filteredNewsList[position]
         holder.bind(article)
     }
 
     override fun getItemCount(): Int {
-        return newsList.size
+        return filteredNewsList.size
     }
 
     inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -51,8 +53,13 @@ class NewsAdapter(
         fun bind(article: NewsData.ArticleData) {
             titleTextView.text = article.title
             sourceTextView.text = article.author
-            Picasso.get().load(article.urlToImage).into(imageView)
-//             Glide.with(itemView.context).load(article.urlToImage).into(imageView)
+
+            if (article.urlToImage != null) {
+                Picasso.get().load(article.urlToImage).into(imageView)
+            }
+            else {
+                Picasso.get().load(R.drawable.not_available).into(imageView)
+            }
         }
     }
 }
