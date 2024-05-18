@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import edu.tacoma.uw.huskyhaze.models.DateUtils.formatToDayMonth
 import edu.tacoma.uw.huskyhaze.models.DateUtils.toDate
 import edu.tacoma.uw.huskyhaze.models.WeatherData
+import kotlin.math.roundToInt
 
 class ForecastAdapter(private val forecastList: List<WeatherData.DailyData>) :
     RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(){
@@ -30,8 +31,8 @@ class ForecastAdapter(private val forecastList: List<WeatherData.DailyData>) :
             val currentForecast = forecastList[position]
 
             holder.dateTextView.text = currentForecast.dt.toDate().formatToDayMonth()
-            holder.minTempTextView.text = "Min: " + currentForecast.temp.min.toString() + "°F"
-            holder.maxTempTextView.text = "Max: " + currentForecast.temp.max.toString() + "°F"
+            holder.minTempTextView.text = "Min: " + currentForecast.temp.min.roundToInt().toString() + "°F"
+            holder.maxTempTextView.text = "Max: " + currentForecast.temp.max.roundToInt().toString() + "°F"
             holder.weatherTypeTextView.text = currentForecast.weather[0].main
         }
 

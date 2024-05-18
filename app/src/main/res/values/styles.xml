@@ -24,6 +24,9 @@
         <item name="android:background">?attr/colorSurface</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
+    <style name="Homepage" parent="AppTheme">
+        <item name="android:background">?attr/background</item>
+    </style>
     <style name="HomepageGreeting" parent="AppTheme">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textStyle">bold</item>
@@ -31,6 +34,20 @@
         <item name="android:shadowDx">1.5</item>
         <item name="android:shadowDy">1.5</item>
         <item name="android:shadowRadius">1.3</item>
+        <item name="android:text">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+    <style name="HomepageGreetingInfo" parent="AppTheme">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">?attr/colorOutline</item>
+        <item name="android:shadowDx">1.5</item>
+        <item name="android:shadowDy">1.5</item>
+        <item name="android:shadowRadius">1.3</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:text">@null</item>
     </style>
     <style name="Settings" parent="AppTheme">
         <item name="android:textColor">?attr/colorOnPrimary</item>

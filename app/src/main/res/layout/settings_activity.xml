@@ -36,12 +36,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
-                android:src="@drawable/android_avatar" />
+                android:layout_marginBottom="25dp"
+                android:src="@drawable/person_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,6 +85,7 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml"
                 style="@style/ContainedTextSecondary"/>
         </LinearLayout>
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
@@ -121,8 +122,8 @@
                 android:text="@string/switcher_1"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:ignore="UseSwitchCompatOrMaterialXml"
-                style="@style/ContainedTextPrimary" />
+                style="@style/ContainedTextPrimary"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
             <Switch
                 android:id="@+id/switch2"
                 android:layout_width="match_parent"
@@ -132,8 +133,8 @@
                 android:text="@string/switcher_2"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:ignore="UseSwitchCompatOrMaterialXml"
-                style="@style/ContainedTextPrimary"  />
+                style="@style/ContainedTextPrimary"
+                tools:ignore="UseSwitchCompatOrMaterialXml"  />
         </LinearLayout>
 </LinearLayout>
 

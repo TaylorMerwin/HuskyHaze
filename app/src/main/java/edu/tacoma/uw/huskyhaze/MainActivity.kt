@@ -22,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Calendar
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -110,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         // UWT coordinates
 //        val latitude = 47.24
 //        val longitude = -122.43
-        var currentTemp = 0.0
+        var currentTemp = 0
         var currentWeather = "unknown"
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -121,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val weatherData = response.body()
                         if (weatherData != null) {
-                            currentTemp = weatherData.current.temp;
+                            currentTemp = weatherData.current.temp.roundToInt();
                             currentWeather = weatherData.current.weather[0].main
                             val iconCode = weatherData.current.weather[0].icon
                             val iconUrl = "https://openweathermap.org/img/wn/${iconCode}@2x.png"
@@ -144,12 +145,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun displayWeather(temperature: Double?, weatherType: String?, iconUrl: String?) {
-        val greeting = createWelcomeGreeting(temperature, weatherType)
+    private fun displayWeather(temperature: Int?, weatherType: String?, iconUrl: String?) {
+        val greetingInfo = createWelcomeGreeting(temperature, weatherType)
         val greetingTextView = findViewById<TextView>(R.id.GreetingTextView)
+        val greetingInfoTextView = findViewById<TextView>(R.id.GreetingInfoTextView)
         val weatherIconImageView = findViewById<ImageView>(R.id.weatherIconImageView)
-        greetingTextView.text = greeting
-        Log.d("WeatherGreeting", greeting)
+        greetingTextView.text = getTimeOfDayGreeting()
+        greetingInfoTextView.text = greetingInfo
+        Log.d("WeatherGreeting", getTimeOfDayGreeting())
+        Log.d("WeatherGreetingInfo", greetingInfo)
         Log.d("WeatherIcon", iconUrl.toString())
 
         Picasso.get()
@@ -162,18 +166,21 @@ class MainActivity : AppCompatActivity() {
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
 
         return when (hourOfDay) {
-            in 4..11 -> "morning"  // 4 AM to 11 AM
-            in 12..16 -> "afternoon" // 12 PM to 4 PM
-            else -> "evening" // 5 PM to 3AM
+            in 4..11 -> "Good morning!"  // 4 AM to 11 AM
+            in 12..16 -> "Good afternoon!" // 12 PM to 4 PM
+            else -> "Good evening!" // 5 PM to 3AM
         }
     }
 
-    private fun createWelcomeGreeting(temperature: Double? = null, weatherType: String? = null): String {
-        val timeGreeting = getTimeOfDayGreeting()
+    private fun createWelcomeGreeting(temperature: Int? = null, weatherType: String? = null): String {
         return if (temperature!= null && weatherType != null) {
-            "Good $timeGreeting! It's $temperature°F with $weatherType in Tacoma."
+            if (weatherType == "Clear") {
+                "It's $temperature°F and $weatherType in Tacoma."
+            } else {
+                "It's $temperature°F with $weatherType in Tacoma."
+            }
         } else {
-            "Good $timeGreeting! Welcome to HuskyHaze."
+            "Welcome to HuskyHaze."
         }
     }
 

@@ -11,7 +11,7 @@
     <!-- Sync Preferences -->
     <string name="theme_title">Dark Mode</string>
     <string name="mode_title">Minimal Mode</string>
-    <string name="dark_light_mode">Dark/Light Mode</string>
+    <string name="dark_light_mode">Dark Mode</string>
     <string name="switcher_1">Switch 1</string>
     <string name="switcher_2">Switch 2</string>
     <string name="aboutUs">About Us</string>
@@ -19,7 +19,8 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="todo">TODO</string>
     <string name="settings_button">Settings button</string>
-    <string name="greeting">Good [morning], [User]. \nIt is currently [55]&#xB0; and [sunny] in [Tacoma].</string>
+    <string name="greeting">Good [morning]!</string>
+    <string name="greetingInfo">It is currently [55]&#xB0; and [sunny] in [Tacoma].</string>
     <string name="show_me">Show me…</string>
     <string name="home_background_image">Home Background Image</string>
     <string name="username">Username</string>

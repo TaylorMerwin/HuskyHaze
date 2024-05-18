@@ -39,13 +39,13 @@
     <color name="md_theme_onTertiaryFixed">#221B00</color>
     <color name="md_theme_tertiaryFixedDim">#DDC66E</color>
     <color name="md_theme_onTertiaryFixedVariant">#544600</color>
-    <color name="md_theme_surfaceDim">#D9D9E0</color>
+    <color name="md_theme_surfaceDim">#CCD9D9E0</color>
     <color name="md_theme_surfaceBright">#F9F9FF</color>
     <color name="md_theme_surfaceContainerLowest">#FFFFFF</color>
-    <color name="md_theme_surfaceContainerLow">#F3F3FA</color>
+    <color name="md_theme_surfaceContainerLow">#CCF3F3FA</color>
     <color name="md_theme_surfaceContainer">#EDEDF4</color>
     <color name="md_theme_surfaceContainerHigh">#E7E8EE</color>
-    <color name="md_theme_surfaceContainerHighest">#E2E2E9</color>
+    <color name="md_theme_surfaceContainerHighest">#BFE2E2E9</color>
     <color name="md_theme_primary_mediumContrast">#234373</color>
     <color name="md_theme_onPrimary_mediumContrast">#FFFFFF</color>
     <color name="md_theme_primaryContainer_mediumContrast">#5875A8</color>
