@@ -51,7 +51,7 @@
 
         <TextView
             android:id="@+id/GreetingTextView"
-            style="@style/HomepageGreeting"
+            style="@style/TextPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/weatherIconImageView"

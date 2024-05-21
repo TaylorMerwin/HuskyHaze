@@ -27,7 +27,7 @@
     <style name="Homepage" parent="AppTheme">
         <item name="android:background">?attr/background</item>
     </style>
-    <style name="HomepageGreeting" parent="AppTheme">
+    <style name="TextPrimary" parent="AppTheme">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textStyle">bold</item>
         <item name="android:shadowColor">?attr/colorOutline</item>

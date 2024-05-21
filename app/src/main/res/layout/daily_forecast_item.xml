@@ -3,26 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="8dp"
+    android:layout_margin="6dp"
+    style="@style/ContainerPrimary" >
 
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        style="@style/TextPrimary" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@null" >
 
         <TextView
             android:id="@+id/minTempTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="start|center"/>
+            android:layout_gravity="start|bottom"
+            android:background="@null"/>
 
         <ImageView
             android:id="@+id/weatherTypeImageView"
@@ -39,21 +44,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@null" >
 
         <TextView
             android:id="@+id/maxTempTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="start" />
+            android:layout_gravity="start"
+            android:background="@null" />
 
         <TextView
             android:id="@+id/weatherTypeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="2dp"/>
+            android:layout_marginEnd="2dp"
+            android:background="@null" />
 
     </LinearLayout>
 
