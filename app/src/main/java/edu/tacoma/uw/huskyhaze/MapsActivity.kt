@@ -3,6 +3,7 @@ package edu.tacoma.uw.huskyhaze
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -31,7 +32,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         latitude = intent.getDoubleExtra("latitude", 47.24)
         longitude = intent.getDoubleExtra("longitude", -122.43)
 
-        locationTextView = findViewById<TextView>(R.id.locationTextView)
+        locationTextView = findViewById(R.id.locationTextView)
 
         ViewCompat.setOnApplyWindowInsetsListener(
             findViewById<View>(R.id.main)
@@ -43,6 +44,48 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.id_map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
+
+        val searchView = findViewById<SearchView>(R.id.search_view)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    val coordinates = it.split(",")
+                    if (coordinates.size == 2) {
+                        try {
+                            val lat = coordinates[0].trim().toDouble()
+                            val lng = coordinates[1].trim().toDouble()
+                            updateMapLocation(lat, lng)
+                        } catch (e: NumberFormatException) {
+                            showErrorDialog("Invalid coordinates format. Please enter in the format: lat,lng")
+                        }
+                    } else {
+                        showErrorDialog("Invalid input. Please enter coordinates in the format: lat,lng")
+                    }
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+    }
+
+    private fun updateMapLocation(lat: Double, lng: Double) {
+        latitude = lat
+        longitude = lng
+        val newLocation = LatLng(lat, lng)
+        gMap?.clear()
+        gMap?.addMarker(MarkerOptions().position(newLocation).title("Selected Location"))
+        gMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 12f))
+    }
+
+    private fun showErrorDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(message)
+        builder.setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
