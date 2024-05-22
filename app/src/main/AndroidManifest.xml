@@ -21,6 +21,9 @@
             android:name=".MapsActivity"
             android:exported="false" />
         <activity
+            android:name=".ArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:label="Home" />
