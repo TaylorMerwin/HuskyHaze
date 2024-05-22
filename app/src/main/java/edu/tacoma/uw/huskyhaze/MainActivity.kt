@@ -1,20 +1,17 @@
 package edu.tacoma.uw.huskyhaze
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.squareup.picasso.Picasso
 import edu.tacoma.uw.huskyhaze.network.WeatherService
 import kotlinx.coroutines.CoroutineScope
@@ -32,6 +29,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+            val userId = sharedPreferences.getInt("user_id", -1)
+            val userName = sharedPreferences.getString("user_name", "Guest")
+            Log.i("MainActivity", "User ID: $userId, User Name: $userName")
+            Toast.makeText(this@MainActivity, "Username = $userName", Toast.LENGTH_SHORT).show()
+        }, 1000)
+
 
 
         val weatherButton = findViewById<Button>(R.id.weatherButton)
