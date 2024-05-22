@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                         val weatherData = response.body()
                         if (weatherData != null) {
                             currentTemp = weatherData.current.temp.roundToInt();
-                            currentWeather = weatherData.current.weather[0].main
+                            currentWeather = weatherData.current.weather[0].main.lowercase()
                             val iconCode = weatherData.current.weather[0].icon
                             val iconUrl = "https://openweathermap.org/img/wn/${iconCode}@2x.png"
                             displayWeather(currentTemp, currentWeather, iconUrl)

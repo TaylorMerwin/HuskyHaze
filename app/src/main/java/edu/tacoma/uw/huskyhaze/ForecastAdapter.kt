@@ -1,7 +1,6 @@
 package edu.tacoma.uw.huskyhaze
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class ForecastAdapter(private val forecastList: List<WeatherData.DailyData>) :
         holder.dateTextView.text = currentForecast.dt.toDate().formatToDayMonth()
         holder.minTempTextView.text = "Min: " + currentForecast.temp.min.roundToInt().toString() + "°F"
         holder.maxTempTextView.text = "Max: " + currentForecast.temp.max.roundToInt().toString() + "°F"
-        holder.weatherTypeTextView.text = currentForecast.weather[0].main
+        holder.weatherTypeTextView.text = checkForAtmosphere(currentForecast.weather[0].main)
         holder.weatherTypeImageView.setImageResource(getWeatherIcon(currentForecast.weather[0].main))
     }
 
@@ -51,6 +50,13 @@ class ForecastAdapter(private val forecastList: List<WeatherData.DailyData>) :
             in "Drizzle" -> R.drawable.ic_drizzle
             in "Thunderstorm" -> R.drawable.ic_thunderstorm
             else -> getTimeOfDayForClear()
+        }
+    }
+
+    private fun checkForAtmosphere(weatherType: String): String {
+        return when (weatherType) {
+            "Atmosphere" -> "Haze"
+            else -> weatherType
         }
     }
 
