@@ -57,37 +57,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         settingsButton.setOnClickListener {
-            val translateAnimator = ObjectAnimator.ofFloat(
-                settingsButton,
-                "translationX",
-                0f, -(getScreenWidth().toFloat()-settingsButton.width.toFloat()-50)
-            )
-            translateAnimator.duration = 1000
-            val rotateAnimator = ObjectAnimator.ofFloat(settingsButton, "rotation", 0f, -540f)
-            rotateAnimator.duration = 1000
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(translateAnimator, rotateAnimator)
-            animatorSet.start()
-            animatorSet.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationEnd(animation: Animator) {
-                    val intent = Intent(this@MainActivity, SettingsActivity::class.java)
-                    startActivity(intent)
-                }
-                override fun onAnimationCancel(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationRepeat(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-            })
+            val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+            startActivity(intent)
         }
-//        aboutUsButton.setOnClickListener {
-//            val intent = Intent(this, AboutUsActivity::class.java)
-//            startActivity(intent)
-//        }
         fetchCurrentWeather()
     }
     @Deprecated("Deprecated in Java")
@@ -175,9 +147,9 @@ class MainActivity : AppCompatActivity() {
     private fun createWelcomeGreeting(temperature: Int? = null, weatherType: String? = null): String {
         return if (temperature!= null && weatherType != null) {
             if (weatherType == "Clear") {
-                "It's $temperature°F and $weatherType in Tacoma."
+                "It's $temperature°F and $weatherType"
             } else {
-                "It's $temperature°F with $weatherType in Tacoma."
+                "It's $temperature°F with $weatherType"
             }
         } else {
             "Welcome to HuskyHaze."

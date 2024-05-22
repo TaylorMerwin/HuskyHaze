@@ -46,5 +46,6 @@
     <string name="app_purpose_content_3">Stay tuned for updates and new features as we continue to enhance the Husky Haze experience for our fellow UW Huskies!</string>
     <string name="about_us">About Us</string>
     <string name="weather_icon">Weather Icon</string>
+    <string name="this_week_s_forecast">This week\'s forecast</string>
 
 </resources>

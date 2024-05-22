@@ -8,30 +8,18 @@
         android:id="@+id/forecastHeaderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This week's forecast in"
+        android:text="@string/this_week_s_forecast"
         android:textSize="30sp"
         android:layout_gravity="top|start"
         android:elevation="0dp"
         android:padding="10dp"
-        android:backgroundTint="?attr/colorSurface"/>
-
-    <TextView
-        android:id="@+id/locationTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tacoma"
-        android:textSize="30sp"
-        android:elevation="2dp"
-        android:layout_marginTop="45dp"
-        android:padding="15dp"
-        android:background="@drawable/rectangle_fade"
-        />
+        android:background="@drawable/rectangle_fade"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/forecastRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
