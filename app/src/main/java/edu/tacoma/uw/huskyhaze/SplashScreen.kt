@@ -29,7 +29,7 @@ class SplashScreen : AppCompatActivity() {
         imageView.startAnimation(animation)
 
         Handler().postDelayed({
-            val intent = Intent(this@SplashScreen, MainActivity::class.java)
+            val intent = Intent(this@SplashScreen, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)
