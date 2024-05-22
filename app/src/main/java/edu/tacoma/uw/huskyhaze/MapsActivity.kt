@@ -19,34 +19,38 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var gMap: GoogleMap? = null
     private var locationTextView: TextView? = null
-    private var latitude = 0.0
-    private var longitude = 0.0
+    private var latitude = 47.24 // Default latitude
+    private var longitude = -122.43 // Default longitude
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.enableEdgeToEdge()
         setContentView(R.layout.activity_maps)
+
+        // Retrieve the passed latitude and longitude
+        latitude = intent.getDoubleExtra("latitude", 47.24)
+        longitude = intent.getDoubleExtra("longitude", -122.43)
 
         locationTextView = findViewById<TextView>(R.id.locationTextView)
 
         ViewCompat.setOnApplyWindowInsetsListener(
             findViewById<View>(R.id.main)
         ) { v: View, insets: WindowInsetsCompat ->
-            val systemBars =
-                insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.id_map) as SupportMapFragment?
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.id_map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         gMap = googleMap
-        val defaultLocation = LatLng(47.24,-122.43)
-        googleMap.addMarker(MarkerOptions().position(defaultLocation).title("Tacoma"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
+        val initialLocation = LatLng(latitude, longitude)
+        googleMap.addMarker(MarkerOptions().position(initialLocation).title("Selected Location"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, 12f))
+
         googleMap.setOnMapClickListener { latLng ->
             latitude = latLng.latitude
             longitude = latLng.longitude
@@ -60,9 +64,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 setResult(RESULT_OK, resultIntent)
                 finish()
             }
-            builder.setNegativeButton(
-                "No"
-            ) { dialog, which -> dialog.dismiss() }
+            builder.setNegativeButton("No") { dialog, which -> dialog.dismiss() }
             val dialog = builder.create()
             dialog.show()
         }
