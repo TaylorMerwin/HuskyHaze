@@ -39,8 +39,6 @@ class ArticleActivity : AppCompatActivity() {
                 error: WebResourceError?
             ) {
                 super.onReceivedError(view, request, error)
-
-                Toast.makeText(applicationContext, "Failed to load article", Toast.LENGTH_LONG).show()
             }
         }
         webView.loadUrl(articleUrl)
