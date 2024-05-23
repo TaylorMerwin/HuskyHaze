@@ -25,18 +25,19 @@ import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
-
+    private val REQUEST_MAPS_ACTIVITY = 1
+    private var latitude = 47.24 // Default UWT latitude
+    private var longitude = -122.43 // Default UWT longitude
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
 
         val weatherButton = findViewById<Button>(R.id.weatherButton)
         val newsButton = findViewById<Button>(R.id.newsButton)
         val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
         val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
-
+        val mapsButton = findViewById<Button>(R.id.mapsButton)
 
         weatherButton.setOnClickListener {
             val intent = Intent(this, WeatherActivity::class.java)
@@ -46,6 +47,12 @@ class MainActivity : AppCompatActivity() {
         newsButton.setOnClickListener {
             val intent = Intent(this, NewsActivity::class.java)
             startActivity(intent)
+        }
+        mapsButton.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra("latitude", latitude)
+            intent.putExtra("longitude", longitude)
+            startActivityForResult(intent, REQUEST_MAPS_ACTIVITY)
         }
 
         settingsButton.setOnClickListener {
@@ -82,6 +89,17 @@ class MainActivity : AppCompatActivity() {
         }
         fetchCurrentWeather()
     }
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_MAPS_ACTIVITY && resultCode == RESULT_OK) {
+            // Receive updated latitude and longitude from MapsActivity
+            latitude = data?.getDoubleExtra("latitude", latitude) ?: latitude
+            longitude = data?.getDoubleExtra("longitude", longitude) ?: longitude
+
+            fetchCurrentWeather()
+        }
+    }
     private fun getScreenWidth(): Int {
         return resources.displayMetrics.widthPixels
     }
@@ -90,8 +108,8 @@ class MainActivity : AppCompatActivity() {
         val weatherService = WeatherService.create()
         val apiKey = getString(R.string.open_weather_api_key)
         // UWT coordinates
-        val latitude = 47.24
-        val longitude = -122.43
+//        val latitude = 47.24
+//        val longitude = -122.43
         var currentTemp = 0.0
         var currentWeather = "unknown"
 
