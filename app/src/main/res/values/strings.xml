@@ -11,7 +11,7 @@
     <!-- Sync Preferences -->
     <string name="theme_title">Dark Mode</string>
     <string name="mode_title">Minimal Mode</string>
-    <string name="dark_light_mode">Dark/Light Mode</string>
+    <string name="dark_light_mode">Dark Mode</string>
     <string name="switcher_1">Switch 1</string>
     <string name="switcher_2">Switch 2</string>
     <string name="aboutUs">About Us</string>
@@ -19,7 +19,8 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="todo">TODO</string>
     <string name="settings_button">Settings button</string>
-    <string name="greeting">Good [morning], [User]. \nIt is currently [55]&#xB0; and [sunny] in [Tacoma].</string>
+    <string name="greeting">Good [morning]!</string>
+    <string name="greetingInfo">It is currently [55]&#xB0; and [sunny] in [Tacoma].</string>
     <string name="show_me">Show me…</string>
     <string name="home_background_image">Home Background Image</string>
     <string name="username">Username</string>
@@ -44,5 +45,7 @@
     <string name="app_purpose_content_2">Whether you are planning your day on campus or preparing for a weekend getaway, Husky Haze ensures you\'re always informed and ready for whatever lies ahead.</string>
     <string name="app_purpose_content_3">Stay tuned for updates and new features as we continue to enhance the Husky Haze experience for our fellow UW Huskies!</string>
     <string name="about_us">About Us</string>
+    <string name="weather_icon">Weather Icon</string>
+    <string name="this_week_s_forecast">This week\'s forecast</string>
 
 </resources>

@@ -24,39 +24,6 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
 
-        val backButton = findViewById<ImageButton>(R.id.backButton)
-
-        backButton.setOnClickListener {
-            val translateAnimator = ObjectAnimator.ofFloat(
-                backButton,
-                "translationX",
-                0f, (getScreenWidth().toFloat()-backButton.width.toFloat()-25)
-            )
-            translateAnimator.duration = 1000
-            val rotateAnimator = ObjectAnimator.ofFloat(backButton, "rotation", 0f, 540f)
-            rotateAnimator.duration = 1000
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(translateAnimator, rotateAnimator)
-            animatorSet.start()
-            animatorSet.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationEnd(animation: Animator) {
-                    val intent = Intent(this@SettingsActivity, MainActivity::class.java)
-                    startActivity(intent)
-                }
-                override fun onAnimationCancel(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationRepeat(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-            })
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-        }
-
         supportActionBar?.hide()
         switcher = findViewById(R.id.dark_light_switch)
 
@@ -84,6 +51,9 @@ class SettingsActivity : AppCompatActivity() {
 
         aboutUsButton.setOnClickListener {
             val fragment = AboutFragment()
+
+            val intent = Intent(this, AboutUsActivity::class.java)
+            startActivity(intent)
 
             // Begin the transaction
             supportFragmentManager.beginTransaction().apply {

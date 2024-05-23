@@ -11,13 +11,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/hazesun_dark"
+        android:src="?attr/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/home_background_image" />
-
 
     <ImageButton
         android:id="@+id/settingsButton"
@@ -25,7 +24,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="#00FFFFFF"
+        android:background="@null"
         android:contentDescription="@string/settings_button"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,134 +36,115 @@
         app:srcCompat="@drawable/baseline_settings_dark" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ContentConstraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="175dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="75dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/GreetingTextFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="125dp"
+        android:padding="6dp"
+        app:layout_constraintBottom_toTopOf="@id/ContentConstraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/ContainerPrimary">
 
         <TextView
             android:id="@+id/GreetingTextView"
-            android:layout_width="0dp"
+            style="@style/TextPrimary"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/roboto_bold"
-            android:padding="20dp"
-            android:text="@string/greeting"
-            android:textColor="@color/m_secondary_dark"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/weatherIconImageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            android:padding="5dp" />
+
+        <ImageView
+            android:id="@+id/weatherIconImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/GreetingInfoTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/GreetingTextView" />
+
+        <TextView
+            android:id="@+id/GreetingInfoTextView"
+            style="@style/HomepageGreetingInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:text="@string/greetingInfo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weatherIconImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ContentConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="25dp"
+        android:padding="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/GreetingTextFrame"
+        android:backgroundTint="#00FFFFFF">
 
         <Button
             android:id="@+id/weatherButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/rounded_rectangle_dark"
-            android:backgroundTint="@color/m_primary_container_dark"
-            android:fontFamily="@font/roboto"
+            android:layout_marginTop="75dp"
+            android:layout_marginBottom="5dp"
             android:text="@string/weather"
-            android:textColor="@color/m_on_secondary_dark"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/newsButton"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/newsButton"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/GreetingTextView" />
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/ContainedTextPrimary" />
 
         <Button
             android:id="@+id/newsButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/rounded_rectangle_dark"
-            android:fontFamily="@font/roboto"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:text="@string/news"
-            android:textColor="@color/m_on_secondary_dark"
-            android:textColorLink="@color/m_on_primary_dark"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/weatherButton"
-            app:layout_constraintTop_toBottomOf="@+id/GreetingTextView" />
-
-        <TextView
-            android:id="@+id/showMeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="@string/show_me"
-            android:textColor="@color/m_secondary_dark"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/mapsButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <ImageView
-            android:id="@+id/weatherIconImageView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="132dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="130dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/GreetingTextView" />
-
-        <Button
-            android:id="@+id/aboutUsBtnMain"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/rounded_rectangle_dark"
-            android:backgroundTint="@color/m_primary_container_dark"
-            android:fontFamily="@font/roboto"
-            android:text="@string/about_us"
-            android:textColor="@color/m_on_secondary_dark"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/mapsButton"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/GreetingTextView"
-            app:layout_constraintVertical_bias="0.93" />
+            app:layout_constraintTop_toBottomOf="@+id/weatherButton"
+            style="@style/ContainedTextPrimary" />
 
         <Button
             android:id="@+id/mapsButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/rounded_rectangle_dark"
-            android:fontFamily="@font/roboto"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="50dp"
             android:text="@string/maps"
-            android:textColor="@color/m_on_secondary_dark"
-            android:textColorLink="@color/m_on_primary_dark"
-            android:textSize="24sp"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/aboutUsBtnMain"
-            app:layout_constraintTop_toBottomOf="@+id/GreetingTextView"
-            app:layout_constraintVertical_bias="0.924" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/newsButton"
+            style="@style/ContainedTextPrimary" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

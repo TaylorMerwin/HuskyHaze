@@ -22,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Calendar
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val weatherButton = findViewById<Button>(R.id.weatherButton)
         val newsButton = findViewById<Button>(R.id.newsButton)
         val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
-        val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
+//        val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
         val mapsButton = findViewById<Button>(R.id.mapsButton)
 
         weatherButton.setOnClickListener {
@@ -56,35 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         settingsButton.setOnClickListener {
-            val translateAnimator = ObjectAnimator.ofFloat(
-                settingsButton,
-                "translationX",
-                0f, -(getScreenWidth().toFloat()-settingsButton.width.toFloat()-50)
-            )
-            translateAnimator.duration = 1000
-            val rotateAnimator = ObjectAnimator.ofFloat(settingsButton, "rotation", 0f, -540f)
-            rotateAnimator.duration = 1000
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(translateAnimator, rotateAnimator)
-            animatorSet.start()
-            animatorSet.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationEnd(animation: Animator) {
-                    val intent = Intent(this@MainActivity, SettingsActivity::class.java)
-                    startActivity(intent)
-                }
-                override fun onAnimationCancel(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationRepeat(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-            })
-        }
-        aboutUsButton.setOnClickListener {
-            val intent = Intent(this, AboutUsActivity::class.java)
+            val intent = Intent(this@MainActivity, SettingsActivity::class.java)
             startActivity(intent)
         }
         fetchCurrentWeather()
@@ -110,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         // UWT coordinates
 //        val latitude = 47.24
 //        val longitude = -122.43
-        var currentTemp = 0.0
+        var currentTemp = 0
         var currentWeather = "unknown"
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -121,8 +94,8 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val weatherData = response.body()
                         if (weatherData != null) {
-                            currentTemp = weatherData.current.temp;
-                            currentWeather = weatherData.current.weather[0].main
+                            currentTemp = weatherData.current.temp.roundToInt();
+                            currentWeather = weatherData.current.weather[0].main.lowercase()
                             val iconCode = weatherData.current.weather[0].icon
                             val iconUrl = "https://openweathermap.org/img/wn/${iconCode}@2x.png"
                             displayWeather(currentTemp, currentWeather, iconUrl)
@@ -144,12 +117,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun displayWeather(temperature: Double?, weatherType: String?, iconUrl: String?) {
-        val greeting = createWelcomeGreeting(temperature, weatherType)
+    private fun displayWeather(temperature: Int?, weatherType: String?, iconUrl: String?) {
+        val greetingInfo = createWelcomeGreeting(temperature, weatherType)
         val greetingTextView = findViewById<TextView>(R.id.GreetingTextView)
+        val greetingInfoTextView = findViewById<TextView>(R.id.GreetingInfoTextView)
         val weatherIconImageView = findViewById<ImageView>(R.id.weatherIconImageView)
-        greetingTextView.text = greeting
-        Log.d("WeatherGreeting", greeting)
+        greetingTextView.text = getTimeOfDayGreeting()
+        greetingInfoTextView.text = greetingInfo
+        Log.d("WeatherGreeting", getTimeOfDayGreeting())
+        Log.d("WeatherGreetingInfo", greetingInfo)
         Log.d("WeatherIcon", iconUrl.toString())
 
         Picasso.get()
@@ -162,18 +138,21 @@ class MainActivity : AppCompatActivity() {
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
 
         return when (hourOfDay) {
-            in 4..11 -> "morning"  // 4 AM to 11 AM
-            in 12..16 -> "afternoon" // 12 PM to 4 PM
-            else -> "evening" // 5 PM to 3AM
+            in 4..11 -> "Good morning!"  // 4 AM to 11 AM
+            in 12..16 -> "Good afternoon!" // 12 PM to 4 PM
+            else -> "Good evening!" // 5 PM to 3AM
         }
     }
 
-    private fun createWelcomeGreeting(temperature: Double? = null, weatherType: String? = null): String {
-        val timeGreeting = getTimeOfDayGreeting()
+    private fun createWelcomeGreeting(temperature: Int? = null, weatherType: String? = null): String {
         return if (temperature!= null && weatherType != null) {
-            "Good $timeGreeting! It's $temperature°F with $weatherType in Tacoma."
+            if (weatherType == "Clear") {
+                "It's $temperature°F and $weatherType"
+            } else {
+                "It's $temperature°F with $weatherType"
+            }
         } else {
-            "Good $timeGreeting! Welcome to HuskyHaze."
+            "Welcome to HuskyHaze."
         }
     }
 
