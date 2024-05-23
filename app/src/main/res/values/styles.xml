@@ -76,4 +76,7 @@
         <item name="android:backgroundTint">?attr/colorSurfaceContainerHighest</item>
         <item name="android:padding">10dp</item>
     </style>
+    <style name="splash" parent="AppTheme">
+        <item name="android:backgroundTint">?attr/colorOnSurfaceVariant</item>
+    </style>
 </resources>
