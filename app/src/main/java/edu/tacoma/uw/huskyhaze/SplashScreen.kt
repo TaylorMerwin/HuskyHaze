@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
 import java.util.logging.Handler
 
 class SplashScreen : AppCompatActivity() {
@@ -23,6 +27,7 @@ class SplashScreen : AppCompatActivity() {
             .asGif()
             .load(R.drawable.haze_gif_center_light)
             .into(gifImageView);
+        // make animation load after gif is loaded
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -32,6 +37,8 @@ class SplashScreen : AppCompatActivity() {
         }
         supportActionBar?.hide()
 
+        val gifAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+        gifImageView.startAnimation(gifAnimation)
         // Start the animation
         val imageView = findViewById<ImageView>(R.id.iv_image)
         val animation = AnimationUtils.loadAnimation(this, R.anim.scale_animation)
