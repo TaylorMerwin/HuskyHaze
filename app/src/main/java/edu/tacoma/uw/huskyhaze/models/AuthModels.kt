@@ -14,6 +14,8 @@ data class LoginResponse(
 
 // Data model for user info
 data class UserInfo(
+    val result: String,
+    val userId: Int,
     val email: String,
     val name: String,
 )

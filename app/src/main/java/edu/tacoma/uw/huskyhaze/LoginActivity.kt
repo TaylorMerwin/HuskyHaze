@@ -1,6 +1,5 @@
 package edu.tacoma.uw.huskyhaze
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -42,32 +41,30 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val loginResponse = response.body()
                             if (loginResponse?.result == "success") {
-
-                                val userId = loginResponse.userId
-
-                                // Get user info from user_info.php
-                                val userInfoResponse = userService.getUserInfo(userId) // Assuming you create a getUserInfo method in UserService
-                                if (userInfoResponse.isSuccessful) {
-                                    val userInfo = userInfoResponse.body()
-                                    val userEmail = userInfo?.email
-                                    val userName = userInfo?.name
-
-                                    // Store user ID, email, and name in SharedPreferences
-                                    val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                                    sharedPreferences.edit().putInt("user_id", userId)
-                                        .putString("user_email", userEmail)
-                                        .putString("user_name", userName)
-                                        .apply()
-                                }
-                                else {
+                                // Retrieve user info from UserInfo
+                                val userInfoResponse = userService.getUserInfo(3)
+                                if (!userInfoResponse.isSuccessful) {
                                     Toast.makeText(this@LoginActivity, "Error: ${userInfoResponse.message()}", Toast.LENGTH_SHORT).show()
+                                    return@withContext
                                 }
-                                Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
-                                // Login successful, navigate to MainActivity
+//                                val userInfo = userInfoResponse.body()
+//                                val userName = userInfo?.name
+//                                val userEmail = userInfo?.email
+//                                val userId = userInfo
+//
+//                                    .userId
+//                                // Store user ID and name in SharedPreferences
+//                                val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+//                                sharedPreferences.edit().putInt("user_id", userId)
+//                                    .putString("user_email", userEmail)
+//                                    .putString("user_name", userName)
+//                                    .apply()
+
+                                // Start MainActivity and finish LoginActivity
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                intent.putExtra("user_id", userId) //Pass user ID to MainActivity
+                               // intent.putExtra("user_id", userId)
                                 startActivity(intent)
-                                finish() // Close LoginActivity
+                                finish()
                             } else {
                                 Toast.makeText(this@LoginActivity, loginResponse?.result ?: "Unknown error", Toast.LENGTH_SHORT).show()
                             }

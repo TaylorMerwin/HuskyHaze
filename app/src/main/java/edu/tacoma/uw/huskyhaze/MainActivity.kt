@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             val userName = sharedPreferences.getString("user_name", "Guest")
             Log.i("MainActivity", "User ID: $userId, User Name: $userName")
             Toast.makeText(this@MainActivity, "Username = $userName", Toast.LENGTH_SHORT).show()
-        }, 1000)
+        }, 5000)
 
 
 
