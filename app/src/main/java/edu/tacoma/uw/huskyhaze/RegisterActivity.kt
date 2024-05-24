@@ -8,7 +8,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import edu.tacoma.uw.huskyhaze.models.LoginRequest
 import edu.tacoma.uw.huskyhaze.models.RegisterRequest
 import edu.tacoma.uw.huskyhaze.network.UserService
 import kotlinx.coroutines.Dispatchers

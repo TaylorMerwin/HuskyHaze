@@ -1,26 +1,21 @@
 package edu.tacoma.uw.huskyhaze.network
 
 import edu.tacoma.uw.huskyhaze.models.LoginRequest
-import edu.tacoma.uw.huskyhaze.models.LoginResponse
 import edu.tacoma.uw.huskyhaze.models.RegisterRequest
+import edu.tacoma.uw.huskyhaze.models.RegisterResponse
 import edu.tacoma.uw.huskyhaze.models.UserInfo
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface UserService {
     @POST("login.php")
-    suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
-
-    @GET("user_info.php")
-    suspend fun getUserInfo(@Query("user_id") userId: Int): Response<UserInfo>
+    suspend fun login(@Body request: LoginRequest): Response<UserInfo>
 
     @POST("register_user.php")
-    suspend fun register(@Body request: RegisterRequest): Response<LoginResponse>
+    suspend fun register(@Body request: RegisterRequest): Response<RegisterResponse>
 
 
     companion object {
