@@ -1,5 +1,6 @@
 package edu.tacoma.uw.huskyhaze
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,8 +42,11 @@ class NewsAdapter(
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                val article = newsList[position]
-                listener.onItemClick(article.url)
+                val article = filteredNewsList[position]
+                val intent = Intent(v?.context, ArticleActivity::class.java).apply {
+                    putExtra("articleUrl", article.url)
+                }
+                v?.context?.startActivity(intent)
             }
         }
 
