@@ -9,6 +9,9 @@ import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
+/**
+ * Activity class for the settings.
+ */
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var switcher: Switch
@@ -16,6 +19,10 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
+    /**
+     * Initializes settings page which include the dark mode switch and about us button.
+     * Displays the correct theme based on if the dark mode switch is active or not.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)

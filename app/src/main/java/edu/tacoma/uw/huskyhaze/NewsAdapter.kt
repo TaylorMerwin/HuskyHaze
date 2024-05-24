@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.tacoma.uw.huskyhaze.models.NewsData
 
+/**
+ * Adapter class to work with the recycler view in the news activity XML file.
+ */
 class NewsAdapter(
-    private val newsList: List<NewsData.ArticleData>,
-    private val listener: OnItemClickListener
+    newsList: List<NewsData.ArticleData>
 ) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
-    interface OnItemClickListener {
-        fun onItemClick(url: String)
-    }
 
+    /**
+     * Removes any blank articles so they aren't displayed.
+     */
     private val filteredNewsList = newsList.filter { it.title != "[Removed]" }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
@@ -34,6 +36,9 @@ class NewsAdapter(
         return filteredNewsList.size
     }
 
+    /**
+     * Initializes listeners for each article displayed on the screen.
+     */
     inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         init {
             itemView.setOnClickListener(this)
@@ -54,6 +59,9 @@ class NewsAdapter(
         private val sourceTextView: TextView = itemView.findViewById(R.id.text_source)
         private val imageView: ImageView = itemView.findViewById(R.id.img_headline)
 
+        /**
+         * Assigns article data to match their respective parts in the news XML format.
+         */
         fun bind(article: NewsData.ArticleData) {
             titleTextView.text = article.title
             sourceTextView.text = article.author

@@ -1,7 +1,5 @@
 package edu.tacoma.uw.huskyhaze
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,10 +14,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
 
+/**
+ * Activity class for the news.
+ */
 class NewsActivity : AppCompatActivity(), View.OnClickListener {
 
-    var recyclerView: RecyclerView? = null
-    var adapter: NewsAdapter? = null
     var b1: Button? = null
     var b2: Button? = null
     var b3: Button? = null
@@ -28,6 +27,9 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
     var b6: Button? = null
     var b7: Button? = null
 
+    /**
+     * Initializes and sets a listener to all buttons and search bar.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
@@ -60,6 +62,9 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
+    /**
+     * Fetches the news headlines when the news activity is first opened.
+     */
     private fun fetchNewsHeadlines() {
         val newsService = NewsService.create()
         val apiKey = getString(R.string.news_api_key)
@@ -71,12 +76,7 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
             if (response.isSuccessful) {
                 val newsData = response.body()
                 if (newsData != null) {
-                    val newsAdapter = NewsAdapter(newsData.articles, object : NewsAdapter.OnItemClickListener {
-                        override fun onItemClick(url: String) {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                            startActivity(intent)
-                        }
-                    })
+                    val newsAdapter = NewsAdapter(newsData.articles)
 
                     runOnUiThread {
                         val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
@@ -92,6 +92,9 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * Updates the displayed news articles if the user clicks on a category button.
+     */
     override fun onClick(v: View?) {
         val button = v as Button
         val category = button.text.toString().lowercase(Locale.getDefault())
@@ -110,12 +113,7 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
                 if (newsData != null) {
                     runOnUiThread {
                         val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
-                        recyclerView.adapter = NewsAdapter(newsData.articles, object : NewsAdapter.OnItemClickListener {
-                            override fun onItemClick(url: String) {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                                startActivity(intent)
-                            }
-                        })
+                        recyclerView.adapter = NewsAdapter(newsData.articles)
                     }
                     Log.d("NewsResponse", newsData.toString())
                 }
@@ -125,6 +123,9 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * Updates the displayed news articles when the user enters in a keyword in the search bar.
+     */
     private fun fetchNewsSearch(search: String) {
         val newsService = NewsService.create()
         val apiKey = getString(R.string.news_api_key)
@@ -137,12 +138,7 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
                 if (newsData != null) {
                     runOnUiThread {
                         val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
-                        recyclerView.adapter = NewsAdapter(newsData.articles, object : NewsAdapter.OnItemClickListener {
-                            override fun onItemClick(url: String) {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                                startActivity(intent)
-                            }
-                        })
+                        recyclerView.adapter = NewsAdapter(newsData.articles)
                     }
                     Log.d("NewsResponse", newsData.toString())
                 }
