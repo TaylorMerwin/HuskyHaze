@@ -47,5 +47,12 @@
     <string name="about_us">About Us</string>
     <string name="weather_icon">Weather Icon</string>
     <string name="this_week_s_forecast">This week\'s forecast</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account_login_here">Already have an account? login here.</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here.</string>
 
 </resources>

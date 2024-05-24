@@ -80,5 +80,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        registerTextView.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

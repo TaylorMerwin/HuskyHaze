@@ -2,6 +2,7 @@ package edu.tacoma.uw.huskyhaze.network
 
 import edu.tacoma.uw.huskyhaze.models.LoginRequest
 import edu.tacoma.uw.huskyhaze.models.LoginResponse
+import edu.tacoma.uw.huskyhaze.models.RegisterRequest
 import edu.tacoma.uw.huskyhaze.models.UserInfo
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -17,6 +18,9 @@ interface UserService {
 
     @GET("user_info.php")
     suspend fun getUserInfo(@Query("user_id") userId: Int): Response<UserInfo>
+
+    @POST("register_user.php")
+    suspend fun register(@Body request: RegisterRequest): Response<LoginResponse>
 
 
     companion object {
