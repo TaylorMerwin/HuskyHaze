@@ -1,7 +1,9 @@
 package edu.tacoma.uw.huskyhaze
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -41,24 +43,19 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val loginResponse = response.body()
                             if (loginResponse?.result == "success") {
-                                // Retrieve user info from UserInfo
-                                val userInfoResponse = userService.getUserInfo(3)
-                                if (!userInfoResponse.isSuccessful) {
-                                    Toast.makeText(this@LoginActivity, "Error: ${userInfoResponse.message()}", Toast.LENGTH_SHORT).show()
-                                    return@withContext
-                                }
-//                                val userInfo = userInfoResponse.body()
-//                                val userName = userInfo?.name
-//                                val userEmail = userInfo?.email
-//                                val userId = userInfo
-//
-//                                    .userId
-//                                // Store user ID and name in SharedPreferences
-//                                val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-//                                sharedPreferences.edit().putInt("user_id", userId)
-//                                    .putString("user_email", userEmail)
-//                                    .putString("user_name", userName)
-//                                    .apply()
+
+                                val userName = loginResponse.name
+                                val userEmail = loginResponse.email
+                                val userId = loginResponse.userId
+
+                                Log.i("LoginActivity", "User ID: $userId, User Name: $userName, User Email: $userEmail")
+
+                                // Store user ID and name in SharedPreferences
+                                val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                                sharedPreferences.edit().putInt("user_id", userId)
+                                    .putString("user_email", userEmail)
+                                    .putString("user_name", userName)
+                                    .apply()
 
                                 // Start MainActivity and finish LoginActivity
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)

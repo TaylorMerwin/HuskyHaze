@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import edu.tacoma.uw.huskyhaze.network.WeatherService
@@ -36,8 +35,7 @@ class MainActivity : AppCompatActivity() {
             val userId = sharedPreferences.getInt("user_id", -1)
             val userName = sharedPreferences.getString("user_name", "Guest")
             Log.i("MainActivity", "User ID: $userId, User Name: $userName")
-            Toast.makeText(this@MainActivity, "Username = $userName", Toast.LENGTH_SHORT).show()
-        }, 5000)
+        }, 2000)
 
 
 
@@ -101,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val weatherData = response.body()
                         if (weatherData != null) {
-                            currentTemp = weatherData.current.temp.roundToInt();
+                            currentTemp = weatherData.current.temp.roundToInt()
                             currentWeather = weatherData.current.weather[0].main.lowercase()
                             val iconCode = weatherData.current.weather[0].icon
                             val iconUrl = "https://openweathermap.org/img/wn/${iconCode}@2x.png"
