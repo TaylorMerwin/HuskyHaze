@@ -31,8 +31,6 @@ class LoginActivity : AppCompatActivity() {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
 
-            //TODO: Validate email and password
-
             val loginRequest = LoginRequest(email, password)
             // Send login request using Retrofit
             lifecycleScope.launch(Dispatchers.IO) {

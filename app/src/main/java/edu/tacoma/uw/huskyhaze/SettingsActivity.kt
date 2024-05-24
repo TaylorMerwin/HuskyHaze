@@ -1,14 +1,10 @@
 package edu.tacoma.uw.huskyhaze
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -50,29 +46,10 @@ class SettingsActivity : AppCompatActivity() {
         val aboutUsButton = findViewById<Button>(R.id.aboutUsBtn)
 
         aboutUsButton.setOnClickListener {
-            val fragment = AboutFragment()
 
             val intent = Intent(this, AboutUsActivity::class.java)
             startActivity(intent)
-
-            // Begin the transaction
-            supportFragmentManager.beginTransaction().apply {
-                setCustomAnimations(
-                    R.anim.slide_in_up,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out_down
-                )
-                replace(R.id.fragment_container, fragment)
-                // Add the transaction to the back stack to be able to navigate back
-                addToBackStack(null)
-                // Commit the transaction
-                commit()
-            }
         }
     }
 
-    private fun getScreenWidth(): Int {
-        return resources.displayMetrics.widthPixels
-    }
 }
