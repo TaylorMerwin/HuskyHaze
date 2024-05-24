@@ -108,7 +108,7 @@
             android:id="@+id/weatherButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="5dp"
             android:text="@string/weather"
             android:textSize="30sp"
