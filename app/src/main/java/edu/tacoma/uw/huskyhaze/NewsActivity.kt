@@ -1,3 +1,6 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
 import android.os.Bundle
@@ -129,7 +132,6 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
     private fun fetchNewsSearch(search: String) {
         val newsService = NewsService.create()
         val apiKey = getString(R.string.news_api_key)
-        val country = "us"
 
         CoroutineScope(Dispatchers.IO).launch {
             val response = newsService.searchNews(search, apiKey)
