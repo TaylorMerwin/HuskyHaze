@@ -47,5 +47,7 @@
     <string name="about_us">About Us</string>
     <string name="weather_icon">Weather Icon</string>
     <string name="this_week_s_forecast">This week\'s forecast</string>
+    <string name="launcher_icon">launcher icon</string>
+    <string name="haze_gif">haze gif</string>
 
 </resources>

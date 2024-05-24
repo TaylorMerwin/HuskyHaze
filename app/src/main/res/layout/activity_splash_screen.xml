@@ -9,27 +9,27 @@
     tools:context=".SplashScreen"
     style="@style/splash">
 
-
-    <ImageView
-        android:id="@+id/iv_image"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:src="@drawable/ic_launcher"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/gifImageView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:contentDescription="@string/haze_gif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@null" />
 
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:contentDescription="@string/launcher_icon"
+        android:src="@drawable/ic_launcher"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
