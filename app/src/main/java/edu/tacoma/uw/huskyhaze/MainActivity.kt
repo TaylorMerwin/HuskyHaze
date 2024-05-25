@@ -52,6 +52,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, WeatherActivity::class.java)
             startActivity(intent)
         }
+        val shareButton = findViewById<Button>(R.id.shareButton)
+        shareButton.setOnClickListener {
+            shareWeatherInfo()
+        }
 
         newsButton.setOnClickListener {
             val intent = Intent(this, NewsActivity::class.java)
@@ -81,6 +85,27 @@ class MainActivity : AppCompatActivity() {
             fetchCurrentWeather()
         }
     }
+
+    /**
+     * Shares the current weather information via an intent.
+     */
+    private fun shareWeatherInfo() {
+        val greetingInfoTextView = findViewById<TextView>(R.id.GreetingInfoTextView)
+        val weatherInfo = greetingInfoTextView.text.toString()
+
+        if (weatherInfo.isNotEmpty()) {
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, weatherInfo)
+                type = "text/plain"
+            }
+            val chooser = Intent.createChooser(shareIntent, "Share weather info via:")
+            startActivity(chooser)
+        } else {
+            Log.e("ShareWeatherInfo", "No weather information available to share.")
+        }
+    }
+
     private fun getScreenWidth(): Int {
         return resources.displayMetrics.widthPixels
     }
@@ -88,9 +113,6 @@ class MainActivity : AppCompatActivity() {
     private fun fetchCurrentWeather() {
         val weatherService = WeatherService.create()
         val apiKey = getString(R.string.open_weather_api_key)
-        // UWT coordinates
-//        val latitude = 47.24
-//        val longitude = -122.43
         var currentTemp = 0
         var currentWeather = "unknown"
 
