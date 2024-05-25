@@ -41,6 +41,7 @@ class NewsAdapter(
 
     /**
      * Initializes listeners for each article displayed on the screen.
+     * @param itemView The items to use in the recycler view.
      */
     inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         init {
@@ -64,6 +65,7 @@ class NewsAdapter(
 
         /**
          * Assigns article data to match their respective parts in the news XML format.
+         * @param article The article to connect the data with to the recycler view.
          */
         fun bind(article: NewsData.ArticleData) {
             titleTextView.text = article.title

@@ -32,6 +32,7 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
 
     /**
      * Initializes and sets a listener to all buttons and search bar.
+     * @param savedInstanceState The instance state when created.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +55,10 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
 
         findViewById<SearchView>(R.id.search_view)?.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
+            /**
+             * Updates the displayed news articles when the user uses the search bar.
+             * @param search The keyword to search for.
+             */
             override fun onQueryTextSubmit(search: String): Boolean {
                 fetchNewsSearch(search)
                 return true
@@ -104,6 +109,10 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
         fetchNewsByCategory(category)
     }
 
+    /**
+     * Fetches news articles by a category described in the NewsAPI.
+     * @param category The category to update news articles with.
+     */
     private fun fetchNewsByCategory(category: String) {
         val newsService = NewsService.create()
         val apiKey = getString(R.string.news_api_key)
@@ -128,6 +137,7 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
 
     /**
      * Updates the displayed news articles when the user enters in a keyword in the search bar.
+     * @param search The keyword to search for.
      */
     private fun fetchNewsSearch(search: String) {
         val newsService = NewsService.create()

@@ -28,6 +28,7 @@ class ArticleActivity : AppCompatActivity() {
 
     /**
      * Displays the given article URL to the web view.
+     * @param articleUrl The URL of the article to display.
      */
     private fun fetchArticleContent(articleUrl: String?) {
         if (articleUrl.isNullOrEmpty()) {
