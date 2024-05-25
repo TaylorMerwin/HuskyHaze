@@ -15,7 +15,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 
+/**
+ * SplashScreen class
+ */
 class SplashScreen : AppCompatActivity() {
+
+    /**
+     * onCreate
+     * @param savedInstanceState
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

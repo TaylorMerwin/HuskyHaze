@@ -23,6 +23,9 @@ import kotlinx.coroutines.withContext
 import java.util.Calendar
 import kotlin.math.roundToInt
 
+/**
+ * The main activity of the HuskyHaze app.
+ */
 class MainActivity : AppCompatActivity() {
 
     private val REQUEST_MAPS_ACTIVITY = 1

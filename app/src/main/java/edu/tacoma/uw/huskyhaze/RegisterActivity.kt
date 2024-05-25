@@ -17,8 +17,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * The RegisterActivity class is responsible for handling user registration.
+ */
 class RegisterActivity : AppCompatActivity() {
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The Bundle containing the activity's previously saved state.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
