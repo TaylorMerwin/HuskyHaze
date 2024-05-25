@@ -51,6 +51,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, WeatherActivity::class.java)
             startActivity(intent)
         }
+        val shareButton = findViewById<Button>(R.id.shareButton)
+        shareButton.setOnClickListener {
+            shareWeatherInfo()
+        }
 
         newsButton.setOnClickListener {
             val intent = Intent(this, NewsActivity::class.java)
@@ -69,13 +73,6 @@ class MainActivity : AppCompatActivity() {
         }
         fetchCurrentWeather()
     }
-
-    /**
-     * This method is called when the MapsActivity returns a result.
-     * @param requestCode The request code
-     * @param resultCode The result code
-     * @param data The intent data
-     */
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -86,6 +83,30 @@ class MainActivity : AppCompatActivity() {
 
             fetchCurrentWeather()
         }
+    }
+
+    /**
+     * Shares the current weather information via an intent.
+     */
+    private fun shareWeatherInfo() {
+        val greetingInfoTextView = findViewById<TextView>(R.id.GreetingInfoTextView)
+        val weatherInfo = greetingInfoTextView.text.toString()
+
+        if (weatherInfo.isNotEmpty()) {
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, weatherInfo)
+                type = "text/plain"
+            }
+            val chooser = Intent.createChooser(shareIntent, "Share weather info via:")
+            startActivity(chooser)
+        } else {
+            Log.e("ShareWeatherInfo", "No weather information available to share.")
+        }
+    }
+
+    private fun getScreenWidth(): Int {
+        return resources.displayMetrics.widthPixels
     }
 
     /**
@@ -167,7 +188,7 @@ class MainActivity : AppCompatActivity() {
             else -> "Good evening!" // 5 PM to 3AM
         }
     }
-    
+
     /**
      * This method creates a welcome greeting based on the current weather.
      * @param temperature The current temperature
