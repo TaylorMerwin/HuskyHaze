@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         val weatherButton = findViewById<Button>(R.id.weatherButton)
         val newsButton = findViewById<Button>(R.id.newsButton)
         val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
-//        val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
         val mapsButton = findViewById<Button>(R.id.mapsButton)
 
         weatherButton.setOnClickListener {
@@ -70,6 +69,13 @@ class MainActivity : AppCompatActivity() {
         }
         fetchCurrentWeather()
     }
+
+    /**
+     * This method is called when the MapsActivity returns a result.
+     * @param requestCode The request code
+     * @param resultCode The result code
+     * @param data The intent data
+     */
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -81,10 +87,10 @@ class MainActivity : AppCompatActivity() {
             fetchCurrentWeather()
         }
     }
-    private fun getScreenWidth(): Int {
-        return resources.displayMetrics.widthPixels
-    }
 
+    /**
+     * This method fetches the current weather data from the OpenWeather API.
+     */
     private fun fetchCurrentWeather() {
         val weatherService = WeatherService.create()
         val apiKey = getString(R.string.open_weather_api_key)
@@ -125,6 +131,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * This method displays the weather information on the main activity.
+     * @param temperature The current temperature
+     * @param weatherType The current weather type
+     * @param iconUrl The URL of the weather icon
+     */
     private fun displayWeather(temperature: Int?, weatherType: String?, iconUrl: String?) {
         val greetingInfo = createWelcomeGreeting(temperature, weatherType)
         val greetingTextView = findViewById<TextView>(R.id.GreetingTextView)
@@ -141,6 +153,10 @@ class MainActivity : AppCompatActivity() {
             .into(weatherIconImageView)
     }
 
+    /**
+     * This method returns a greeting based on the time of day.
+     * @return A greeting based on the time of day
+     */
     private fun getTimeOfDayGreeting(): String {
         val calendar = Calendar.getInstance()
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
@@ -151,7 +167,13 @@ class MainActivity : AppCompatActivity() {
             else -> "Good evening!" // 5 PM to 3AM
         }
     }
-
+    
+    /**
+     * This method creates a welcome greeting based on the current weather.
+     * @param temperature The current temperature
+     * @param weatherType The current weather type
+     * @return A welcome greeting based on the current weather
+     */
     private fun createWelcomeGreeting(temperature: Int? = null, weatherType: String? = null): String {
         return if (temperature!= null && weatherType != null) {
             if (weatherType == "Clear") {
