@@ -1,3 +1,6 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
 import android.content.Context
@@ -18,6 +21,9 @@ import kotlinx.coroutines.withContext
 import java.util.Calendar
 import kotlin.math.roundToInt
 
+/**
+ * The main activity of the HuskyHaze app.
+ */
 class MainActivity : AppCompatActivity() {
 
     private val REQUEST_MAPS_ACTIVITY = 1
@@ -36,12 +42,15 @@ class MainActivity : AppCompatActivity() {
         val weatherButton = findViewById<Button>(R.id.weatherButton)
         val newsButton = findViewById<Button>(R.id.newsButton)
         val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
-//        val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
         val mapsButton = findViewById<Button>(R.id.mapsButton)
 
         weatherButton.setOnClickListener {
             val intent = Intent(this, WeatherActivity::class.java)
             startActivity(intent)
+        }
+        val shareButton = findViewById<Button>(R.id.shareButton)
+        shareButton.setOnClickListener {
+            shareWeatherInfo()
         }
 
         newsButton.setOnClickListener {
@@ -72,10 +81,34 @@ class MainActivity : AppCompatActivity() {
             fetchCurrentWeather()
         }
     }
+
+    /**
+     * Shares the current weather information via an intent.
+     */
+    private fun shareWeatherInfo() {
+        val greetingInfoTextView = findViewById<TextView>(R.id.GreetingInfoTextView)
+        val weatherInfo = greetingInfoTextView.text.toString()
+
+        if (weatherInfo.isNotEmpty()) {
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, weatherInfo)
+                type = "text/plain"
+            }
+            val chooser = Intent.createChooser(shareIntent, "Share weather info via:")
+            startActivity(chooser)
+        } else {
+            Log.e("ShareWeatherInfo", "No weather information available to share.")
+        }
+    }
+
     private fun getScreenWidth(): Int {
         return resources.displayMetrics.widthPixels
     }
 
+    /**
+     * This method fetches the current weather data from the OpenWeather API.
+     */
     private fun fetchCurrentWeather() {
         val weatherService = WeatherService.create()
         val apiKey = getString(R.string.open_weather_api_key)
@@ -116,6 +149,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * This method displays the weather information on the main activity.
+     * @param temperature The current temperature
+     * @param weatherType The current weather type
+     * @param iconUrl The URL of the weather icon
+     */
     private fun displayWeather(temperature: Int?, weatherType: String?, iconUrl: String?) {
         val greetingInfo = createWelcomeGreeting(temperature, weatherType)
         val greetingTextView = findViewById<TextView>(R.id.GreetingTextView)
@@ -133,6 +172,10 @@ class MainActivity : AppCompatActivity() {
             .into(weatherIconImageView)
     }
 
+    /**
+     * This method returns a greeting based on the time of day.
+     * @return A greeting based on the time of day
+     */
     private fun getTimeOfDayGreeting(): String {
         val calendar = Calendar.getInstance()
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
@@ -144,6 +187,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This method creates a welcome greeting based on the current weather.
+     * @param temperature The current temperature
+     * @param weatherType The current weather type
+     * @return A welcome greeting based on the current weather
+     */
     private fun createWelcomeGreeting(temperature: Int? = null, weatherType: String? = null): String {
         return if (temperature!= null && weatherType != null) {
             if (weatherType == "Clear") {

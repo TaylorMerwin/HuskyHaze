@@ -19,6 +19,7 @@
     <color name="md_theme_onBackground">#E2E2E9</color>
     <color name="md_theme_surface">#111318</color>
     <color name="md_theme_surfaceInvis">#00111318</color>
+    <color name="md_theme_surfaceSplash">#000000</color>
     <color name="md_theme_onSurface">#E2E2E9</color>
     <color name="md_theme_surfaceVariant">#44474E</color>
     <color name="md_theme_onSurfaceVariant">#C4C6D0</color>

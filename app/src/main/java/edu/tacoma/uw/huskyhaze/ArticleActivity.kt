@@ -1,3 +1,6 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
 import android.os.Bundle
@@ -5,22 +8,27 @@ import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
+/**
+ * An activity to display an article the user clicked on into a web view.
+ */
 class ArticleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article)
 
+        /**
+         * The URL of the article that is retrieved through the user's intent.
+         */
         val articleUrl = intent.getStringExtra("articleUrl")
 
         fetchArticleContent(articleUrl)
     }
 
+    /**
+     * Displays the given article URL to the web view.
+     */
     private fun fetchArticleContent(articleUrl: String?) {
         if (articleUrl.isNullOrEmpty()) {
             return

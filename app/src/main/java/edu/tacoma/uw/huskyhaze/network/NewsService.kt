@@ -1,3 +1,6 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze.network
 
 import edu.tacoma.uw.huskyhaze.models.NewsData
@@ -16,7 +19,7 @@ interface NewsService {
         @Query("apiKey") apiKey: String
     ): Response<NewsData.NewsData>
 
-    @GET("top-headlines")
+    @GET("everything")
     suspend fun searchNews(
         @Query("q") query: String,
         @Query("apiKey") apiKey: String

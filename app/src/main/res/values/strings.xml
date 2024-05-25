@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">HuskyHaze</string>
     <string name="weather">Weather</string>
     <string name="news">News</string>
@@ -33,10 +33,10 @@
     <string name="about_header">About Husky Haze</string>
     <string name="about_header_content">Welcome to Husky Haze, your personalized weather and news companion designed specifically for the University of Washington community.</string>
     <string name="team_members">Meet the Team</string>
-    <string name="team_members_content_Will">William Hay Email: whay@uw.edu</string>
-    <string name="team_members_content_Minh">Minh Vu Email: minhv2@uw.edu</string>
-    <string name="team_members_content_Taylor">Taylor Merwin Email: tmerwin@uw.edu</string>
-    <string name="team_members_content_Keegan">Keegan Sanders Email: Ksanders@uw.edu</string>
+    <string name="team_members_content_Will">William Hay whay@uw.edu</string>
+    <string name="team_members_content_Minh">Minh Vu minhv2@uw.edu</string>
+    <string name="team_members_content_Taylor">Taylor Merwin tmerwin@uw.edu</string>
+    <string name="team_members_content_Keegan" tools:ignore="Typos">Keegan Sanders ksand11@uw.edu</string>
     <string name="github_link">GitHub Repository</string>
     <string name="github_link_content">Explore our codebase and contribute to the development of Husky Haze on GitHub: <a href="https://github.com/TaylorMerwin/HuskyHaze">https://github.com/TaylorMerwin/HuskyHaze</a></string>
     <string name="app_purpose">Purpose of the App</string>
@@ -51,9 +51,12 @@
     <string name="name">Name</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
-    <string name="already_have_an_account_login_here">Already have an account? login here.</string>
+    <string name="already_have_an_account_login_here">Already have an account? Login here</string>
     <string name="login">Login</string>
     <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here.</string>
     <string name="userEmail">email</string>
+    <string name="launcher_icon">launcher icon</string>
+    <string name="haze_gif">haze gif</string>
+    <string name="person_icon">person icon</string>
 
 </resources>

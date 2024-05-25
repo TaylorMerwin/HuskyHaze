@@ -1,3 +1,6 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
 import android.content.Context
@@ -30,8 +33,6 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-
-            //TODO: Validate email and password
 
             val loginRequest = LoginRequest(email, password)
             // Send login request using Retrofit

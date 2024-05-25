@@ -1,3 +1,6 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
 import android.content.Context
@@ -10,6 +13,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
+/**
+ * Activity class for the settings.
+ */
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var switcher: Switch
@@ -17,6 +23,10 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
+    /**
+     * Initializes settings page which include the dark mode switch and about us button.
+     * Displays the correct theme based on if the dark mode switch is active or not.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
@@ -59,29 +69,10 @@ class SettingsActivity : AppCompatActivity() {
         val aboutUsButton = findViewById<Button>(R.id.aboutUsBtn)
 
         aboutUsButton.setOnClickListener {
-            val fragment = AboutFragment()
 
             val intent = Intent(this, AboutUsActivity::class.java)
             startActivity(intent)
-
-            // Begin the transaction
-            supportFragmentManager.beginTransaction().apply {
-                setCustomAnimations(
-                    R.anim.slide_in_up,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out_down
-                )
-                replace(R.id.fragment_container, fragment)
-                // Add the transaction to the back stack to be able to navigate back
-                addToBackStack(null)
-                // Commit the transaction
-                commit()
-            }
         }
     }
 
-    private fun getScreenWidth(): Int {
-        return resources.displayMetrics.widthPixels
-    }
 }

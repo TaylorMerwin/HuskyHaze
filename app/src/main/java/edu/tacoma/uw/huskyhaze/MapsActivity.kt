@@ -1,3 +1,6 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
 import android.content.Intent
@@ -17,12 +20,19 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
+/**
+ * The MapsActivity class displays a map and allows users to interact with it.
+ * Users can search for coordinates or click on the map to select a location.
+ */
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var gMap: GoogleMap? = null
     private var locationTextView: TextView? = null
     private var latitude = 47.24 // Default latitude
     private var longitude = -122.43 // Default longitude
 
+    /**
+     * Called when the activity is first created. Initializes the map and sets up the search view.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.enableEdgeToEdge()
@@ -41,10 +51,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        // Initialize the map fragment and set the callback
         val mapFragment = supportFragmentManager.findFragmentById(R.id.id_map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
-
+        // Set up the search view for entering coordinates
         val searchView = findViewById<SearchView>(R.id.search_view)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -70,7 +80,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
     }
-
+    /**
+     * Updates the map location to the specified latitude and longitude, and places a marker there.
+     *
+     * @param lat The latitude of the new location.
+     * @param lng The longitude of the new location.
+     */
     private fun updateMapLocation(lat: Double, lng: Double) {
         latitude = lat
         longitude = lng
@@ -80,6 +95,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         gMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 12f))
     }
 
+    /**
+     * Displays an error dialog with the specified message.
+     *
+     * @param message The error message to display.
+     */
     private fun showErrorDialog(message: String) {
         val builder = AlertDialog.Builder(this)
         builder.setMessage(message)
@@ -88,6 +108,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         dialog.show()
     }
 
+    /**
+     * Called when the map is ready to be used.
+     *
+     * @param googleMap The GoogleMap object representing the map.
+     */
     override fun onMapReady(googleMap: GoogleMap) {
         gMap = googleMap
         val initialLocation = LatLng(latitude, longitude)
