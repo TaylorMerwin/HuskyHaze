@@ -1,23 +1,27 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.tacoma.uw.huskyhaze.network.NewsService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Locale
 
+/**
+ * Activity class for the news.
+ */
 class NewsActivity : AppCompatActivity(), View.OnClickListener {
 
-    var recyclerView: RecyclerView? = null
-    var adapter: NewsAdapter? = null
     var b1: Button? = null
     var b2: Button? = null
     var b3: Button? = null
@@ -26,6 +30,10 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
     var b6: Button? = null
     var b7: Button? = null
 
+    /**
+     * Initializes and sets a listener to all buttons and search bar.
+     * @param savedInstanceState The instance state when created.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
@@ -44,8 +52,27 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
         b6?.setOnClickListener(this)
         b7 = findViewById(R.id.btn_7)
         b7?.setOnClickListener(this)
+
+        findViewById<SearchView>(R.id.search_view)?.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            /**
+             * Updates the displayed news articles when the user uses the search bar.
+             * @param search The keyword to search for.
+             */
+            override fun onQueryTextSubmit(search: String): Boolean {
+                fetchNewsSearch(search)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
     }
 
+    /**
+     * Fetches the news headlines when the news activity is first opened.
+     */
     private fun fetchNewsHeadlines() {
         val newsService = NewsService.create()
         val apiKey = getString(R.string.news_api_key)
@@ -57,12 +84,7 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
             if (response.isSuccessful) {
                 val newsData = response.body()
                 if (newsData != null) {
-                    val newsAdapter = NewsAdapter(newsData.articles, object : NewsAdapter.OnItemClickListener {
-                        override fun onItemClick(url: String) {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                            startActivity(intent)
-                        }
-                    })
+                    val newsAdapter = NewsAdapter(newsData.articles)
 
                     runOnUiThread {
                         val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
@@ -78,11 +100,63 @@ class NewsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * Updates the displayed news articles if the user clicks on a category button.
+     */
     override fun onClick(v: View?) {
         val button = v as Button
-        val category = button.getText().toString()
-        // Code below is from a tutorial, will look at this later.
-//        val manager = RequestManager(this)
-//        manager.getNewsHeadlines(listener, category, null)
+        val category = button.text.toString().lowercase(Locale.getDefault())
+        fetchNewsByCategory(category)
+    }
+
+    /**
+     * Fetches news articles by a category described in the NewsAPI.
+     * @param category The category to update news articles with.
+     */
+    private fun fetchNewsByCategory(category: String) {
+        val newsService = NewsService.create()
+        val apiKey = getString(R.string.news_api_key)
+        val country = "us"
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = newsService.getHeadlinesByCategory(country, category, apiKey)
+            if (response.isSuccessful) {
+                val newsData = response.body()
+                if (newsData != null) {
+                    runOnUiThread {
+                        val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
+                        recyclerView.adapter = NewsAdapter(newsData.articles)
+                    }
+                    Log.d("NewsResponse", newsData.toString())
+                }
+            } else {
+                Log.e("NewsResponse", response.errorBody().toString())
+            }
+        }
+    }
+
+    /**
+     * Updates the displayed news articles when the user enters in a keyword in the search bar.
+     * @param search The keyword to search for.
+     */
+    private fun fetchNewsSearch(search: String) {
+        val newsService = NewsService.create()
+        val apiKey = getString(R.string.news_api_key)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = newsService.searchNews(search, apiKey)
+            if (response.isSuccessful) {
+                val newsData = response.body()
+                if (newsData != null) {
+                    runOnUiThread {
+                        val recyclerView = findViewById<RecyclerView>(R.id.news_recycler_view)
+                        recyclerView.adapter = NewsAdapter(newsData.articles)
+                    }
+                    Log.d("NewsResponse", newsData.toString())
+                }
+            } else {
+                Log.e("NewsResponse", response.errorBody().toString())
+            }
+        }
     }
 }

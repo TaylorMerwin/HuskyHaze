@@ -1,10 +1,11 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class AboutUsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,18 +1,21 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
+/**
+ * Activity class for the settings.
+ */
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var switcher: Switch
@@ -20,46 +23,29 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
+    /**
+     * Initializes settings page which include the dark mode switch and about us button.
+     * Displays the correct theme based on if the dark mode switch is active or not.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
 
-        val backButton = findViewById<ImageButton>(R.id.backButton)
+        val userNameTextView = findViewById<TextView>(R.id.usernameTextView)
+        val userEmailTextView = findViewById<TextView>(R.id.userEmailTextView)
 
-        backButton.setOnClickListener {
-            val translateAnimator = ObjectAnimator.ofFloat(
-                backButton,
-                "translationX",
-                0f, (getScreenWidth().toFloat()-backButton.width.toFloat()-25)
-            )
-            translateAnimator.duration = 1000
-            val rotateAnimator = ObjectAnimator.ofFloat(backButton, "rotation", 0f, 540f)
-            rotateAnimator.duration = 1000
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(translateAnimator, rotateAnimator)
-            animatorSet.start()
-            animatorSet.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationEnd(animation: Animator) {
-                    val intent = Intent(this@SettingsActivity, MainActivity::class.java)
-                    startActivity(intent)
-                }
-                override fun onAnimationCancel(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationRepeat(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-            })
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-        }
+        // Get SharedPreferences for user data
+        val userSharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val userName = userSharedPreferences.getString("user_name", "Guest") ?: "Guest"
+        val userEmail = userSharedPreferences.getString("user_email", "")
+
+        userNameTextView.text = userName
+        userEmailTextView.text = userEmail
 
         supportActionBar?.hide()
         switcher = findViewById(R.id.dark_light_switch)
 
+        // Get SharedPreferences for night mode (use a different variable name)
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE)
         nightMode = sharedPreferences.getBoolean("night", false)
 
@@ -83,26 +69,10 @@ class SettingsActivity : AppCompatActivity() {
         val aboutUsButton = findViewById<Button>(R.id.aboutUsBtn)
 
         aboutUsButton.setOnClickListener {
-            val fragment = AboutFragment()
 
-            // Begin the transaction
-            supportFragmentManager.beginTransaction().apply {
-                setCustomAnimations(
-                    R.anim.slide_in_up,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out_down
-                )
-                replace(R.id.fragment_container, fragment)
-                // Add the transaction to the back stack to be able to navigate back
-                addToBackStack(null)
-                // Commit the transaction
-                commit()
-            }
+            val intent = Intent(this, AboutUsActivity::class.java)
+            startActivity(intent)
         }
     }
 
-    private fun getScreenWidth(): Int {
-        return resources.displayMetrics.widthPixels
-    }
 }

@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "edu.tacoma.uw.huskyhaze"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -41,7 +41,9 @@ android {
 }
 
 dependencies {
-
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.squareup.picasso:picasso:2.8")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")

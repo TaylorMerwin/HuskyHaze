@@ -1,20 +1,17 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.squareup.picasso.Picasso
 import edu.tacoma.uw.huskyhaze.network.WeatherService
 import kotlinx.coroutines.CoroutineScope
@@ -22,77 +19,103 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Calendar
+import kotlin.math.roundToInt
 
+/**
+ * The main activity of the HuskyHaze app.
+ */
 class MainActivity : AppCompatActivity() {
 
-
+    private val REQUEST_MAPS_ACTIVITY = 1
+    private var latitude = 47.24 // Default UWT latitude
+    private var longitude = -122.43 // Default UWT longitude
+    private var userName = "Husky" // Default user name
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getInt("user_id", -1)
+        userName = sharedPreferences.getString("user_name", "Husky") ?: "Husky"
+        Log.i("MainActivity", "User ID: $userId, User Name: $userName")
 
         val weatherButton = findViewById<Button>(R.id.weatherButton)
         val newsButton = findViewById<Button>(R.id.newsButton)
         val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
-        val aboutUsButton = findViewById<Button>(R.id.aboutUsBtnMain)
-
+        val mapsButton = findViewById<Button>(R.id.mapsButton)
 
         weatherButton.setOnClickListener {
             val intent = Intent(this, WeatherActivity::class.java)
             startActivity(intent)
+        }
+        val shareButton = findViewById<Button>(R.id.shareButton)
+        shareButton.setOnClickListener {
+            shareWeatherInfo()
         }
 
         newsButton.setOnClickListener {
             val intent = Intent(this, NewsActivity::class.java)
             startActivity(intent)
         }
+        mapsButton.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra("latitude", latitude)
+            intent.putExtra("longitude", longitude)
+            startActivityForResult(intent, REQUEST_MAPS_ACTIVITY)
+        }
 
         settingsButton.setOnClickListener {
-            val translateAnimator = ObjectAnimator.ofFloat(
-                settingsButton,
-                "translationX",
-                0f, -(getScreenWidth().toFloat()-settingsButton.width.toFloat()-50)
-            )
-            translateAnimator.duration = 1000
-            val rotateAnimator = ObjectAnimator.ofFloat(settingsButton, "rotation", 0f, -540f)
-            rotateAnimator.duration = 1000
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(translateAnimator, rotateAnimator)
-            animatorSet.start()
-            animatorSet.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationEnd(animation: Animator) {
-                    val intent = Intent(this@MainActivity, SettingsActivity::class.java)
-                    startActivity(intent)
-                }
-                override fun onAnimationCancel(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-                override fun onAnimationRepeat(animation: Animator) {
-                    TODO("Not yet implemented")
-                }
-            })
-        }
-        aboutUsButton.setOnClickListener {
-            val intent = Intent(this, AboutUsActivity::class.java)
+            val intent = Intent(this@MainActivity, SettingsActivity::class.java)
             startActivity(intent)
         }
         fetchCurrentWeather()
     }
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_MAPS_ACTIVITY && resultCode == RESULT_OK) {
+            // Receive updated latitude and longitude from MapsActivity
+            latitude = data?.getDoubleExtra("latitude", latitude) ?: latitude
+            longitude = data?.getDoubleExtra("longitude", longitude) ?: longitude
+
+            fetchCurrentWeather()
+        }
+    }
+
+    /**
+     * Shares the current weather information via an intent.
+     */
+    private fun shareWeatherInfo() {
+        val greetingInfoTextView = findViewById<TextView>(R.id.GreetingInfoTextView)
+        val weatherInfo = greetingInfoTextView.text.toString()
+
+        if (weatherInfo.isNotEmpty()) {
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, weatherInfo)
+                type = "text/plain"
+            }
+            val chooser = Intent.createChooser(shareIntent, "Share weather info via:")
+            startActivity(chooser)
+        } else {
+            Log.e("ShareWeatherInfo", "No weather information available to share.")
+        }
+    }
+
     private fun getScreenWidth(): Int {
         return resources.displayMetrics.widthPixels
     }
 
+    /**
+     * This method fetches the current weather data from the OpenWeather API.
+     */
     private fun fetchCurrentWeather() {
         val weatherService = WeatherService.create()
         val apiKey = getString(R.string.open_weather_api_key)
         // UWT coordinates
-        val latitude = 47.24
-        val longitude = -122.43
-        var currentTemp = 0.0
+//        val latitude = 47.24
+//        val longitude = -122.43
+        var currentTemp = 0
         var currentWeather = "unknown"
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -103,8 +126,8 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val weatherData = response.body()
                         if (weatherData != null) {
-                            currentTemp = weatherData.current.temp;
-                            currentWeather = weatherData.current.weather[0].main
+                            currentTemp = weatherData.current.temp.roundToInt()
+                            currentWeather = weatherData.current.weather[0].main.lowercase()
                             val iconCode = weatherData.current.weather[0].icon
                             val iconUrl = "https://openweathermap.org/img/wn/${iconCode}@2x.png"
                             displayWeather(currentTemp, currentWeather, iconUrl)
@@ -126,12 +149,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun displayWeather(temperature: Double?, weatherType: String?, iconUrl: String?) {
-        val greeting = createWelcomeGreeting(temperature, weatherType)
+    /**
+     * This method displays the weather information on the main activity.
+     * @param temperature The current temperature
+     * @param weatherType The current weather type
+     * @param iconUrl The URL of the weather icon
+     */
+    private fun displayWeather(temperature: Int?, weatherType: String?, iconUrl: String?) {
+        val greetingInfo = createWelcomeGreeting(temperature, weatherType)
         val greetingTextView = findViewById<TextView>(R.id.GreetingTextView)
+        val greetingInfoTextView = findViewById<TextView>(R.id.GreetingInfoTextView)
         val weatherIconImageView = findViewById<ImageView>(R.id.weatherIconImageView)
-        greetingTextView.text = greeting
-        Log.d("WeatherGreeting", greeting)
+        val greetingText = getTimeOfDayGreeting() + userName + "!"
+        greetingTextView.text = greetingText
+        greetingInfoTextView.text = greetingInfo
+        Log.d("WeatherGreeting", getTimeOfDayGreeting())
+        Log.d("WeatherGreetingInfo", greetingInfo)
         Log.d("WeatherIcon", iconUrl.toString())
 
         Picasso.get()
@@ -139,24 +172,36 @@ class MainActivity : AppCompatActivity() {
             .into(weatherIconImageView)
     }
 
+    /**
+     * This method returns a greeting based on the time of day.
+     * @return A greeting based on the time of day
+     */
     private fun getTimeOfDayGreeting(): String {
         val calendar = Calendar.getInstance()
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
 
         return when (hourOfDay) {
-            in 4..11 -> "morning"  // 4 AM to 11 AM
-            in 12..16 -> "afternoon" // 12 PM to 4 PM
-            else -> "evening" // 5 PM to 3AM
+            in 4..11 -> "Good morning "  // 4 AM to 11 AM
+            in 12..16 -> "Good afternoon " // 12 PM to 4 PM
+            else -> "Good evening " // 5 PM to 3AM
         }
     }
 
-    private fun createWelcomeGreeting(temperature: Double? = null, weatherType: String? = null): String {
-        val timeGreeting = getTimeOfDayGreeting()
+    /**
+     * This method creates a welcome greeting based on the current weather.
+     * @param temperature The current temperature
+     * @param weatherType The current weather type
+     * @return A welcome greeting based on the current weather
+     */
+    private fun createWelcomeGreeting(temperature: Int? = null, weatherType: String? = null): String {
         return if (temperature!= null && weatherType != null) {
-            "Good $timeGreeting! It's $temperature°F with $weatherType in Tacoma."
+            if (weatherType == "Clear") {
+                "It's $temperature°F and $weatherType"
+            } else {
+                "It's $temperature°F with $weatherType"
+            }
         } else {
-            "Good $timeGreeting! Welcome to HuskyHaze."
+            "Welcome to HuskyHaze."
         }
     }
-
 }

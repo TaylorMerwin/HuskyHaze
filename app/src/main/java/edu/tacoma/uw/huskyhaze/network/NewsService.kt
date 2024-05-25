@@ -1,3 +1,6 @@
+/**
+ * Team 3 - TCSS 450 - Spring 2024
+ */
 package edu.tacoma.uw.huskyhaze.network
 
 import edu.tacoma.uw.huskyhaze.models.NewsData
@@ -13,6 +16,12 @@ interface NewsService {
     suspend fun getHeadlinesByCategory(
         @Query("country") country: String = "us",
         @Query("category") category: String = "general",
+        @Query("apiKey") apiKey: String
+    ): Response<NewsData.NewsData>
+
+    @GET("everything")
+    suspend fun searchNews(
+        @Query("q") query: String,
         @Query("apiKey") apiKey: String
     ): Response<NewsData.NewsData>
 
