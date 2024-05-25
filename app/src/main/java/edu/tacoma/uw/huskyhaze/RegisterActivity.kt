@@ -19,6 +19,8 @@ import kotlinx.coroutines.withContext
 
 /**
  * The RegisterActivity class is responsible for handling user registration.
+ * Users can enter their email, username, and password to register for the app.
+ * If registration is successful, the user is navigated to the LoginActivity.
  */
 class RegisterActivity : AppCompatActivity() {
 
@@ -41,6 +43,22 @@ class RegisterActivity : AppCompatActivity() {
             val email = emailEditText.text.toString()
             val name = nameEditText.text.toString()
             val password = passwordEditText.text.toString()
+
+            if (!isValidNameLength(name)) {
+                Toast.makeText(this, "Username must be in between 1 and 10 characters", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if(!isValidPasswordLength(password)) {
+                Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if(!isValidEmailFormat(email)) {
+                Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
 
             val registerRequest = RegisterRequest(email, name, password)
 
@@ -77,5 +95,34 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+
+
+    }
+
+    /**
+     * Checks if the username is between 1 and 10 characters.
+     * @param userName The username to check.
+     * @return True if the username is between 1 and 10 characters, false otherwise.
+     */
+    private fun isValidNameLength(userName: String): Boolean {
+        return userName.length in 1..10
+    }
+
+    /**
+     * Checks if the password is at least 6 characters.
+     * @param password The password to check.
+     * @return True if the password is at least 6 characters, false otherwise.
+     */
+    private fun isValidPasswordLength(password: String): Boolean {
+        return password.length >= 6
+    }
+
+    /**
+     * Checks if the email is in a valid format.
+     * @param email The email to check.
+     * @return True if the email is in a valid format, false otherwise.
+     */
+    private fun isValidEmailFormat(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }
