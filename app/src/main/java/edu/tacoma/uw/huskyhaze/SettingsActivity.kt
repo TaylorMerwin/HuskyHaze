@@ -1,15 +1,12 @@
 package edu.tacoma.uw.huskyhaze
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
@@ -24,9 +21,21 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
 
+        val userNameTextView = findViewById<TextView>(R.id.usernameTextView)
+        val userEmailTextView = findViewById<TextView>(R.id.userEmailTextView)
+
+        // Get SharedPreferences for user data
+        val userSharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val userName = userSharedPreferences.getString("user_name", "Guest") ?: "Guest"
+        val userEmail = userSharedPreferences.getString("user_email", "")
+
+        userNameTextView.text = userName
+        userEmailTextView.text = userEmail
+
         supportActionBar?.hide()
         switcher = findViewById(R.id.dark_light_switch)
 
+        // Get SharedPreferences for night mode (use a different variable name)
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE)
         nightMode = sharedPreferences.getBoolean("night", false)
 
