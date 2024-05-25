@@ -53,7 +53,8 @@
     <string name="register">Register</string>
     <string name="already_have_an_account_login_here">Already have an account? Login here</string>
     <string name="login">Login</string>
-    <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here</string>
+    <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here.</string>
+    <string name="userEmail">email</string>
     <string name="launcher_icon">launcher icon</string>
     <string name="haze_gif">haze gif</string>
     <string name="person_icon">person icon</string>

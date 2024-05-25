@@ -6,8 +6,6 @@ package edu.tacoma.uw.huskyhaze
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
@@ -31,19 +29,15 @@ class MainActivity : AppCompatActivity() {
     private val REQUEST_MAPS_ACTIVITY = 1
     private var latitude = 47.24 // Default UWT latitude
     private var longitude = -122.43 // Default UWT longitude
+    private var userName = "Husky" // Default user name
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-            val userId = sharedPreferences.getInt("user_id", -1)
-            val userName = sharedPreferences.getString("user_name", "Guest")
-            Log.i("MainActivity", "User ID: $userId, User Name: $userName")
-        }, 2000)
-
-
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getInt("user_id", -1)
+        userName = sharedPreferences.getString("user_name", "Husky") ?: "Husky"
+        Log.i("MainActivity", "User ID: $userId, User Name: $userName")
 
         val weatherButton = findViewById<Button>(R.id.weatherButton)
         val newsButton = findViewById<Button>(R.id.newsButton)
@@ -166,7 +160,8 @@ class MainActivity : AppCompatActivity() {
         val greetingTextView = findViewById<TextView>(R.id.GreetingTextView)
         val greetingInfoTextView = findViewById<TextView>(R.id.GreetingInfoTextView)
         val weatherIconImageView = findViewById<ImageView>(R.id.weatherIconImageView)
-        greetingTextView.text = getTimeOfDayGreeting()
+        val greetingText = getTimeOfDayGreeting() + userName + "!"
+        greetingTextView.text = greetingText
         greetingInfoTextView.text = greetingInfo
         Log.d("WeatherGreeting", getTimeOfDayGreeting())
         Log.d("WeatherGreetingInfo", greetingInfo)
@@ -186,9 +181,9 @@ class MainActivity : AppCompatActivity() {
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
 
         return when (hourOfDay) {
-            in 4..11 -> "Good morning!"  // 4 AM to 11 AM
-            in 12..16 -> "Good afternoon!" // 12 PM to 4 PM
-            else -> "Good evening!" // 5 PM to 3AM
+            in 4..11 -> "Good morning "  // 4 AM to 11 AM
+            in 12..16 -> "Good afternoon " // 12 PM to 4 PM
+            else -> "Good evening " // 5 PM to 3AM
         }
     }
 
@@ -209,5 +204,4 @@ class MainActivity : AppCompatActivity() {
             "Welcome to HuskyHaze."
         }
     }
-
 }

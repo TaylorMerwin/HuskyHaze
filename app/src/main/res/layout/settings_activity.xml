@@ -36,6 +36,7 @@
                 android:src="@drawable/person_icon" />
 
             <TextView
+                android:id="@+id/usernameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -44,10 +45,11 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/userEmailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/_phoneNumber"
+                android:text="@string/userEmail"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -57,15 +59,6 @@
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:padding="20dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="20dp"
-                style="@style/ContainedTextSecondary"
-                android:text="@string/edit_profile" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/aboutUsBtn"
