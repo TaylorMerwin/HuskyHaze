@@ -58,5 +58,6 @@
     <string name="launcher_icon">launcher icon</string>
     <string name="haze_gif">haze gif</string>
     <string name="person_icon">person icon</string>
+    <string name="share_weather">Share</string>
 
 </resources>
