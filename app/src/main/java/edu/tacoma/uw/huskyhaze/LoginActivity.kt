@@ -19,6 +19,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * The LoginActivity class is responsible for handling user login.
+ * Users can enter their email and password to log in to the app.
+ */
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +37,7 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-
             val loginRequest = LoginRequest(email, password)
-            // Send login request using Retrofit
             lifecycleScope.launch(Dispatchers.IO) {
                 try {
                     val userService = UserService.create()
@@ -58,9 +60,7 @@ class LoginActivity : AppCompatActivity() {
                                     .putString("user_name", userName)
                                     .apply()
 
-                                // Start MainActivity and finish LoginActivity
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                               // intent.putExtra("user_id", userId)
                                 startActivity(intent)
                                 finish()
                             } else {
@@ -84,4 +84,5 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
 }
